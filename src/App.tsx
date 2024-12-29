@@ -2,8 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Timer from './Timer'
 
@@ -19,29 +17,29 @@ export default function App() {
   const [draggedLetter, setDraggedLetter] = useState(null);
   const [score, setScore] = useState(0);
 
-  const handleDragStart = (letter, index) => {
-    setDraggedLetter({ letter, index });
-  };
+  // const handleDragStart = (letter, index) => {
+  //   setDraggedLetter({ letter, index });
+  // };
 
   const handleDragOver = (e) => {
     e.preventDefault();
   };
 
-  function onDrop(index, targetIndex) {
+  // function onDrop(index, targetIndex) {
 
-  }
+  // }
 
   const handleDrop = (targetIndex) => {
     if (draggedLetter && draggedLetter.index !== targetIndex) {
-      onDrop(draggedLetter.index, targetIndex);
+      // onDrop(draggedLetter.index, targetIndex);
     }
     setDraggedLetter(null);
   };
 
   const url = 'https://jdavisdev.github.io/perquacky/src/assets/masterWordList.txt';
-  const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
+  // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
   let dict = '';
-  fetch(debugUrl)
+  fetch(url)
   .then(response => response.text())
   .then((data) => {
    dict = data;
@@ -217,9 +215,9 @@ return (
 );
 }
 
-function Stats() {
-// show 3 letter word progress
-// 4 letter word progress
-// total score?
+// function Stats() {
+// // show 3 letter word progress
+// // 4 letter word progress
+// // total score?
 
-}
+// }
