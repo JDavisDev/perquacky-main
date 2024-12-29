@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import './App.css'
 import Timer from './Timer'
+import dictImport from '../src/assets/masterWordList.txt'
 
 export default function App() {
   const [word, setWord] = useState('');
@@ -36,10 +37,10 @@ export default function App() {
     setDraggedLetter(null);
   };
 
-  const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
+  // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
   let dict = '';
-  fetch(url)
+  fetch(dictImport)
   .then(response => response.text())
   .then((data) => {
    dict = data;
