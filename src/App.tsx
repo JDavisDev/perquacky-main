@@ -36,7 +36,7 @@ export default function App() {
     setDraggedLetter(null);
   };
 
-  const url = 'https://jdavisdev.github.io/perquacky/src/assets/masterWordList.txt';
+  const url = 'https://jdavisdev.github.io/perquacky-main/src/assets/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
   let dict = '';
   fetch(url)
