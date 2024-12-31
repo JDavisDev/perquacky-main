@@ -14,9 +14,9 @@ export default function App() {
   const [fiveLetterWordCount, setFiveLetterWordCount] = useState(0);
   const [sixLetterWordCount, setSixLetterWordCount] = useState(0);
   const [sevenLetterWordCount, setSevenLetterWordCount] = useState(0);
-  const [showDialog, setShowDialog] = useState(false);
+  const [, setShowDialog] = useState(false);
   const [draggedLetter, setDraggedLetter] = useState(null);
-  const [score, setScore] = useState(0);
+  const [, setScore] = useState(0);
 
   // const handleDragStart = (letter, index) => {
   //   setDraggedLetter({ letter, index });
@@ -127,21 +127,21 @@ export default function App() {
     setShowDialog(true);
   }
 
-  const Dialog = ({ isOpen, children }) => {
-    setShowDialog(false);
+  // const Dialog = ({ isOpen, children }) => {
+  //   setShowDialog(false);
 
 
-    return (
-      <div className="dialog-overlay">
-        <div className="dialog-content">
-          {children}
-          <button onClick={() => setShowDialog(false)}>Close</button>
-          <br></br><br></br>
-          <Share />
-        </div>
-      </div>
-    );
-  }
+  //   return (
+  //     <div className="dialog-overlay">
+  //       <div className="dialog-content">
+  //         {children}
+  //         <button onClick={() => setShowDialog(false)}>Close</button>
+  //         <br></br><br></br>
+  //         <Share />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -149,7 +149,7 @@ export default function App() {
       <WordInputField word={word} onLetterClick={onLetterClick} clearWord={clearWord} submitWord={submitWord} handleDragOver={handleDragOver} handleDragStart={handleDragOver} handleDrop={handleDrop}/>
       <WordHistory wordHistory={submittedWords} />
       <Timer onTimerEnd={onTimerEnd} onResetClicked={clearStats}/>
-      <Score score={score} submittedWords = {submittedWords} threeLetterWordCount={threeLetterWordCount} />
+      <Score submittedWords = {submittedWords} threeLetterWordCount={threeLetterWordCount} />
       {/* {showDialog ? <Dialog isOpen={showDialog}>
         <h1 style={{color: 'black'}}>Game Over!</h1>
         <p>Score</p>
@@ -158,28 +158,28 @@ export default function App() {
   )
 }
 
-function Share() {  
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "Quackle",
-          text: "You suck!",
-          url: "https://jdavisdev.github.io/perquacky-main/",
-        });
-      } catch (error) {
-        console.error('Error sharing:', error);
-      }
-    } else {
-      // Fallback behavior if Web Share API is not supported
-      console.log('Web Share API not supported');
-    }
-  };
+// function Share() {  
+//   const handleShare = async () => {
+//     if (navigator.share) {
+//       try {
+//         await navigator.share({
+//           title: "Quackle",
+//           text: "You suck!",
+//           url: "https://jdavisdev.github.io/perquacky-main/",
+//         });
+//       } catch (error) {
+//         console.error('Error sharing:', error);
+//       }
+//     } else {
+//       // Fallback behavior if Web Share API is not supported
+//       console.log('Web Share API not supported');
+//     }
+//   };
 
-  return (
-    <button onClick={handleShare}>Share</button>
-  );
-}
+//   return (
+//     <button onClick={handleShare}>Share</button>
+//   );
+// }
 
 function LettersGrid(props) {
   const [letter, setLetter] = useState(['A', 'R', 'S', 'E', 'T', 'L', 'I', 'N', 'K']);
@@ -250,7 +250,7 @@ return (
 );
 }
 
-function Score({score, submittedWords, threeLetterWordCount}) {
+function Score({submittedWords, threeLetterWordCount}) {
   let newScore = 0;
   for (const element of submittedWords) {
     newScore = newScore + element.length **2;
@@ -268,14 +268,3 @@ return (
   </div>
 );
 }
-
-
-function useEffect(arg0: () => void, arg1: boolean[]) {
-  throw new Error('Function not implemented.');
-}
-// function Stats() {
-// // show 3 letter word progress
-// // 4 letter word progress
-// // total score?
-
-// }
