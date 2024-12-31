@@ -14,7 +14,7 @@ export default function App() {
   const [fiveLetterWordCount, setFiveLetterWordCount] = useState(0);
   const [sixLetterWordCount, setSixLetterWordCount] = useState(0);
   const [sevenLetterWordCount, setSevenLetterWordCount] = useState(0);
-
+  const [showDialog, setShowDialog] = useState(false);
   const [draggedLetter, setDraggedLetter] = useState(null);
   const [score, setScore] = useState(0);
 
@@ -57,10 +57,11 @@ export default function App() {
     setSixLetterWordCount(0);
     setSevenLetterWordCount(0);
     setScore(0);
+    setSubmittedWords([]);
+    setWord('');
   }
 
   function calculateStats() {
-    clearStats();
     let tempScore = 0;
     submittedWords.forEach((word) => {
       switch (word.length) {
@@ -103,9 +104,9 @@ export default function App() {
   function submitWord() {
     // Send the word to the backend
     // add it to word history and store locally for scoring
-    console.log('submitted word:', word);
     if (word.length > 2 && dict.includes(word) && !submittedWords.includes(word)) {
-      setSubmittedWords([...submittedWords, word]);
+      const update = [...submittedWords, word];
+      setSubmittedWords(update);
       clearWord();
       calculateStats();
     } else {
@@ -121,14 +122,38 @@ export default function App() {
     }
   }
 
+  function onTimerEnd() {
+    clearWord();
+    setShowDialog(true);
+  }
+
+  const Dialog = ({ isOpen, children }) => {
+    setShowDialog(false);
+
+
+    return (
+      <div className="dialog-overlay">
+        <div className="dialog-content">
+          {children}
+          <button onClick={() => setShowDialog(false)}>Close</button>
+          <br></br><br></br>
+          <Share />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <LettersGrid setWord = { setWord }/>
       <WordInputField word={word} onLetterClick={onLetterClick} clearWord={clearWord} submitWord={submitWord} handleDragOver={handleDragOver} handleDragStart={handleDragOver} handleDrop={handleDrop}/>
       <WordHistory wordHistory={submittedWords} />
-      <Timer />
-      <Score score={score} threeLetterWordCount={threeLetterWordCount} />
-      <Share />
+      <Timer onTimerEnd={onTimerEnd} onResetClicked={clearStats}/>
+      <Score score={score} submittedWords = {submittedWords} threeLetterWordCount={threeLetterWordCount} />
+      {/* {showDialog ? <Dialog isOpen={showDialog}>
+        <h1 style={{color: 'black'}}>Game Over!</h1>
+        <p>Score</p>
+      </Dialog> : null} */}
     </>
   )
 }
@@ -177,12 +202,12 @@ const handleShuffleClick = () => {
 
   return (
     <>
-    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleShuffleClick}>
+    <button onClick={handleShuffleClick}>
       Shuffle
       </button>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
     {letter.map((item, index) => (
-      <button key={index} style={{ padding: "30px", fontSize: "32px", backgroundColor: "white", color: "black", border: "1px solid black" }} onClick={() => handleLetterClick(item)}>
+      <button key={index} className="grid-cell" style={{ padding: "30px", fontSize: "40px", backgroundColor: "antiquewhite", color: "black", border: "1px solid black" }} onClick={() => handleLetterClick(item)}>
         {item}
       </button>
     ))}
@@ -190,7 +215,6 @@ const handleShuffleClick = () => {
     </>
   );
 };
-
 
 function WordInputField({ word, onLetterClick, clearWord, submitWord, handleDragStart, handleDragOver, handleDrop }) {
 return (
@@ -210,8 +234,8 @@ return (
       </div>
     ))}
   </div>
-  <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="reset" value="X" alt="Clear the search form" onClick={clearWord}></input>
-  <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Submit" onClick={submitWord}></input>
+  <input style={{ padding: "8px", width:"35%", height: "50px", marginRight:"50px", fontSize:"24px"}}type="reset" value="Clear" alt="Clear the search form" onClick={clearWord}></input>
+  <input style={{ padding: "8px", width:"35%", height: "50px", fontSize:"24px"}}type="submit" value="Submit" onClick={submitWord}></input>
   </>
 );
 }
@@ -226,10 +250,15 @@ return (
 );
 }
 
-function Score({score, threeLetterWordCount}) {
+function Score({score, submittedWords, threeLetterWordCount}) {
+  let newScore = 0;
+  for (const element of submittedWords) {
+    newScore = newScore + element.length **2;
+  }
 return (
   <div>
-    <p>Score: {score}</p>
+    <p>Score: {newScore}</p>
+    <p>Words: {submittedWords.length}</p>
     <p style={{color: threeLetterWordCount >= 3 ? 'green' : 'gray'}}>3 letter words</p>
     <p style={{color: false ? 'green' : 'gray'}}>4 letter words</p>
     <p style={{color: false ? 'green' : 'gray'}}>5 letter words</p>
@@ -240,6 +269,10 @@ return (
 );
 }
 
+
+function useEffect(arg0: () => void, arg1: boolean[]) {
+  throw new Error('Function not implemented.');
+}
 // function Stats() {
 // // show 3 letter word progress
 // // 4 letter word progress

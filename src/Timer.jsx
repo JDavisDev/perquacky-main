@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-export default function Timer() {
+export default function Timer({onTimerEnd, onResetClicked}) {
   // We need ref in this, because we are dealing
   // with JS setInterval to keep track of it and
   // stop it when needed
@@ -7,6 +7,7 @@ export default function Timer() {
 
   // The state for our timer
   const [timer, setTimer] = useState("00:00:00");
+  const [didEnd, setDidEnd] = useState(false);
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
@@ -34,6 +35,10 @@ export default function Timer() {
           ":" +
           (seconds > 9 ? seconds : "0" + seconds)
       );
+    } else if (!didEnd) {
+      setDidEnd(true);
+      setTimer("00:00:00");
+      // onTimerEnd();
     }
   };
 
@@ -77,6 +82,7 @@ export default function Timer() {
   // by the button
   const onClickReset = () => {
     clearTimer(getDeadTime());
+    onResetClicked();
   };
 
   return (
