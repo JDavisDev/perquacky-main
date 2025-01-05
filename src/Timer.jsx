@@ -7,7 +7,6 @@ export default function Timer({onTimerEnd, onResetClicked}) {
 
   // The state for our timer
   const [timer, setTimer] = useState("00:00:00");
-  const [didEnd, setDidEnd] = useState(false);
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
@@ -36,7 +35,6 @@ export default function Timer({onTimerEnd, onResetClicked}) {
           (seconds > 9 ? seconds : "0" + seconds)
       );
     } else if (!didEnd) {
-      setDidEnd(true);
       setTimer("00:00:00");
       // onTimerEnd();
     }

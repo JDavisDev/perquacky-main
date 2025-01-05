@@ -15,27 +15,7 @@ export default function App() {
   const [sixLetterWordCount, setSixLetterWordCount] = useState(0);
   const [sevenLetterWordCount, setSevenLetterWordCount] = useState(0);
   const [, setShowDialog] = useState(false);
-  const [draggedLetter, setDraggedLetter] = useState(null);
   const [, setScore] = useState(0);
-
-  // const handleDragStart = (letter, index) => {
-  //   setDraggedLetter({ letter, index });
-  // };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  // function onDrop(index, targetIndex) {
-
-  // }
-
-  const handleDrop = (targetIndex) => {
-    if (draggedLetter && draggedLetter.index !== targetIndex) {
-      // onDrop(draggedLetter.index, targetIndex);
-    }
-    setDraggedLetter(null);
-  };
 
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
@@ -146,7 +126,7 @@ export default function App() {
   return (
     <>
       <LettersGrid setWord = { setWord }/>
-      <WordInputField word={word} onLetterClick={onLetterClick} clearWord={clearWord} submitWord={submitWord} handleDragOver={handleDragOver} handleDragStart={handleDragOver} handleDrop={handleDrop}/>
+      <WordInputField word={word} onLetterClick={onLetterClick} clearWord={clearWord} submitWord={submitWord}/>
       <WordHistory wordHistory={submittedWords} />
       <Timer onTimerEnd={onTimerEnd} onResetClicked={clearStats}/>
       <Score submittedWords = {submittedWords} threeLetterWordCount={threeLetterWordCount} />
@@ -203,7 +183,7 @@ const handleShuffleClick = () => {
   return (
     <>
     <button onClick={handleShuffleClick}>
-      Shuffle
+      Shuffle v2
       </button>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
     {letter.map((item, index) => (
@@ -216,7 +196,7 @@ const handleShuffleClick = () => {
   );
 };
 
-function WordInputField({ word, onLetterClick, clearWord, submitWord, handleDragStart, handleDragOver, handleDrop }) {
+function WordInputField({ word, onLetterClick, clearWord, submitWord }) {
 return (
   <>
   <div className="scrabble-word">
@@ -226,9 +206,6 @@ return (
         className="scrabble-tile"
         draggable
         onClick={() => onLetterClick(letter, index)}
-        onDragStart={() => handleDragStart(letter, index)}
-        onDragOver={handleDragOver}
-        onDrop={() => handleDrop(index)}
       >
         {letter.toUpperCase()}
       </div>
