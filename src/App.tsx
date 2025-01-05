@@ -128,7 +128,6 @@ export default function App() {
       <LettersGrid setWord = { setWord }/>
       <WordInputField word={word} onLetterClick={onLetterClick} clearWord={clearWord} submitWord={submitWord}/>
       <WordHistory wordHistory={submittedWords} />
-      <Timer onTimerEnd={onTimerEnd} onResetClicked={clearStats}/>
       <Score submittedWords = {submittedWords} threeLetterWordCount={threeLetterWordCount} />
       {/* {showDialog ? <Dialog isOpen={showDialog}>
         <h1 style={{color: 'black'}}>Game Over!</h1>
