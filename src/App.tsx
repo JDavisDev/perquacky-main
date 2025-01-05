@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react'
+import { Key, useState } from 'react'
 import './App.css'
 import Timer from './Timer'
 import dictImport from '../src/assets/masterWordList.txt'
@@ -200,11 +200,10 @@ function WordInputField({ word, onLetterClick, clearWord, submitWord }) {
 return (
   <>
   <div className="scrabble-word">
-    {word.split('').map((letter, index) => (
+    {word.split('').map((letter: string, index: Key) => (
       <div
         key={index}
         className="scrabble-tile"
-        draggable
         onClick={() => onLetterClick(letter, index)}
       >
         {letter.toUpperCase()}
