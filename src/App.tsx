@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Key, useState } from 'react'
 import './App.css'
-import Timer from './Timer'
+// import Timer from './Timer'
 import dictImport from '../src/assets/masterWordList.txt'
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
   const [fiveLetterWordCount, setFiveLetterWordCount] = useState(0);
   const [sixLetterWordCount, setSixLetterWordCount] = useState(0);
   const [sevenLetterWordCount, setSevenLetterWordCount] = useState(0);
-  const [, setShowDialog] = useState(false);
+  // const [, setShowDialog] = useState(false);
   const [, setScore] = useState(0);
 
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
@@ -30,16 +30,16 @@ export default function App() {
     setWord('');
   }
 
-  function clearStats() {
-    setThreeLetterWordCount(0);
-    setFourLetterWordCount(0);
-    setFiveLetterWordCount(0);
-    setSixLetterWordCount(0);
-    setSevenLetterWordCount(0);
-    setScore(0);
-    setSubmittedWords([]);
-    setWord('');
-  }
+  // function clearStats() {
+  //   setThreeLetterWordCount(0);
+  //   setFourLetterWordCount(0);
+  //   setFiveLetterWordCount(0);
+  //   setSixLetterWordCount(0);
+  //   setSevenLetterWordCount(0);
+  //   setScore(0);
+  //   setSubmittedWords([]);
+  //   setWord('');
+  // }
 
   function calculateStats() {
     let tempScore = 0;
@@ -102,10 +102,10 @@ export default function App() {
     }
   }
 
-  function onTimerEnd() {
-    clearWord();
-    setShowDialog(true);
-  }
+  // function onTimerEnd() {
+  //   clearWord();
+  //   setShowDialog(true);
+  // }
 
   // const Dialog = ({ isOpen, children }) => {
   //   setShowDialog(false);
