@@ -1,5 +1,5 @@
 #root {
-  max-width: 1920px;
+  max-width: auto;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -7,51 +7,51 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
-
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
 }
 
 .grid-container {
-  display: grid;
+  display: flex;
+  width: auto;
+  max-width:min-content;
+  justify-content: center;
+  position: relative;
   grid-template-columns: repeat(3, 1fr); /* Adjust for the number of columns */
   gap: 10px;
 }
 
 .grid-cell {
-  width: 150px;
-  height: 150px;
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
   text-align: center;
-  padding: 8px;
+  padding: 6px;
   border: 2px solid #333;
   border-radius: 12px;
   border: 1px solid #ccc;
 }
 
-.grid-cell:hover {
-  transform: scale(1.1);
-}
-
-
 /* ScrabbleWord.css */
 .scrabble-word {
   display: flex;
+  width: auto;
   padding-top: 40px;
-  gap: 8px;
+  align-items: center;
+  gap: 2px;
 }
 
 .scrabble-tile {
-  width: 100px;
-  height: 100px;
+  width: 36px;
+  height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 2px solid #333;
   border-radius: 12px;
   background-color: #ffffff;
-  font-size: 52px;
+  font-size: 20px;
   font-weight: bold;
   color: #333;
   cursor: pointer;
