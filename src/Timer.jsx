@@ -79,6 +79,7 @@ export default function Timer({onTimerEnd, onResetClicked}) {
   return (
     <div style={{ textAlign: "center", margin: "auto" }}>
       <h3>Time</h3>
+      <h4>{timer}</h4>
       <button onClick={onClickReset}>Reset</button>
     </div>
   );
