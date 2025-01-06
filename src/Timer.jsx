@@ -67,15 +67,6 @@ export default function Timer({onTimerEnd, onResetClicked}) {
     return deadline;
   };
 
-  // We can use useEffect so that when the component
-  // mount the timer will start as soon as possible
-
-  // We put empty array to act as componentDid
-  // mount only
-  useEffect(() => {
-    clearTimer(getDeadTime());
-  }, []);
-
   // Another way to call the clearTimer() to start
   // the countdown is via action event from the
   // button first we create function to be called
@@ -88,7 +79,6 @@ export default function Timer({onTimerEnd, onResetClicked}) {
   return (
     <div style={{ textAlign: "center", margin: "auto" }}>
       <h3>Time</h3>
-      <h2>{timer}</h2>
       <button onClick={onClickReset}>Reset</button>
     </div>
   );

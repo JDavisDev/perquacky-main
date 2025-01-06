@@ -13,11 +13,10 @@ body {
 }
 
 .grid-container {
-  display: flex;
-  width: auto;
+  display: grid;
+  align-items: center;
+  align-self: center;
   max-width:min-content;
-  justify-content: center;
-  position: relative;
   grid-template-columns: repeat(3, 1fr); /* Adjust for the number of columns */
   gap: 10px;
 }
