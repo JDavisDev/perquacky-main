@@ -210,8 +210,8 @@ return (
       </div>
     ))}
   </div>
-  <input style={{ padding: "8px", width:"35%", height: "50px", marginRight:"50px", fontSize:"24px"}}type="reset" value="Clear" alt="Clear the search form" onClick={clearWord}></input>
-  <input style={{ padding: "8px", width:"35%", height: "50px", fontSize:"24px"}}type="submit" value="Submit" onClick={submitWord}></input>
+  <input style={{ padding: "4px", width:"auto", height: "50px", marginRight:"20px", fontSize:"14px"}}type="reset" value="Clear" alt="Clear the search form" onClick={clearWord}></input>
+  <input style={{ padding: "4px", width:"auto", height: "50px", fontSize:"14px"}}type="submit" value="Submit" onClick={submitWord}></input>
   </>
 );
 }
