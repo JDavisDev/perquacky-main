@@ -183,11 +183,11 @@ const handleShuffleClick = () => {
   return (
     <>
     <button onClick={handleShuffleClick}>
-      Shuffle v2
+      Shuffle
       </button>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
+      <div className="grid-container" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
     {letter.map((item, index) => (
-      <button key={index} className="grid-cell" style={{ padding: "30px", fontSize: "40px", backgroundColor: "antiquewhite", color: "black", border: "1px solid black" }} onClick={() => handleLetterClick(item)}>
+      <button key={index} className="grid-cell" style={{ padding: "10px", fontSize: "22px", backgroundColor: "antiquewhite", color: "black", border: "1px solid black" }} onClick={() => handleLetterClick(item)}>
         {item}
       </button>
     ))}
