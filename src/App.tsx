@@ -164,19 +164,16 @@ export default function App() {
 function LettersGrid(props) {
   const [letter, setLetter] = useState([]);
   useEffect(() => {
-    fetchLetters();
-  });
-  // Function to shuffle the array
-
- function fetchLetters() {
-    // let letters = [];
-  fetch("https://perquacky-backend.vercel.app/letters")
-  .then(response => response.text())
-  .then((data) => {
-    console.log(data);
-    setLetter(data.split(''));
+    const fetchData = async () => {
+      fetch("https://perquacky-backend.vercel.app/letters")
+        .then(response => response.text())
+        .then((data) => {
+        console.log(data);
+        setLetter(data.split(''));
   })
-  }
+    };
+    fetchData();
+  }, []);
 
   
 const shuffleArray = (arr: any[]) => {
