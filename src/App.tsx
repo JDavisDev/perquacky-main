@@ -8,6 +8,7 @@ import dictImport from '../src/assets/masterWordList.txt'
 
 export default function App() {
   const [word, setWord] = useState('');
+  const [letters, setLetters] = useState([]);
   const [submittedWords, setSubmittedWords] = useState([]);
   const [threeLetterWordCount, setThreeLetterWordCount] = useState(0);
   const [fourLetterWordCount, setFourLetterWordCount] = useState(0);
@@ -16,6 +17,18 @@ export default function App() {
   const [sevenLetterWordCount, setSevenLetterWordCount] = useState(0);
   const [, setShowDialog] = useState(false);
   const [, setScore] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      fetch("https://perquacky-backend.vercel.app/letters")
+        .then(response => response.text())
+        .then((data) => {
+        console.log(data);
+        setLetters(data.split(''));
+  })
+    };
+    fetchData();
+  }, []);
 
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
@@ -125,7 +138,7 @@ export default function App() {
 
   return (
     <>
-      <LettersGrid setWord = { setWord }/>
+      <LettersGrid setWord = { setWord } letters = {letters} setLetters={setLetters}/>
       <WordInputField word={word} onLetterClick={onLetterClick} clearWord={clearWord} submitWord={submitWord}/>
       <WordHistory wordHistory={submittedWords} />
       <Timer onTimerEnd={onTimerEnd} onResetClicked={clearStats}/>
@@ -161,20 +174,7 @@ export default function App() {
 //   );
 // }
 
-function LettersGrid(props) {
-  const [letter, setLetter] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      fetch("https://perquacky-backend.vercel.app/letters")
-        .then(response => response.text())
-        .then((data) => {
-        console.log(data);
-        setLetter(data.split(''));
-  })
-    };
-    fetchData();
-  }, []);
-
+function LettersGrid({setWord, letters, setLetters}) {
   
 const shuffleArray = (arr: any[]) => {
   return arr
@@ -184,12 +184,12 @@ const shuffleArray = (arr: any[]) => {
 };
 
 const handleLetterClick =  (letter: string) => {
-  props.setWord((prevWord: string) => prevWord + letter);
+  setWord((prevWord: string) => prevWord + letter);
 }
 
 const handleShuffleClick = () => {
-  const shuffledArray = shuffleArray(letter);
-  setLetter(shuffledArray);
+  const shuffledArray = shuffleArray(letters);
+  setLetters(shuffledArray);
 };
 
   return (
@@ -198,7 +198,7 @@ const handleShuffleClick = () => {
       Shuffle
       </button>
       <div className="grid-container" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
-    {letter.map((item, index) => (
+    {letters.map((item, index) => (
       <button key={index} className="grid-cell" style={{ padding: "10px", fontSize: "22px", backgroundColor: "antiquewhite", color: "black", border: "1px solid black" }} onClick={() => handleLetterClick(item)}>
         {item}
       </button>
