@@ -162,8 +162,21 @@ export default function App() {
 // }
 
 function LettersGrid(props) {
-  const [letter, setLetter] = useState(['A', 'R', 'S', 'E', 'T', 'L', 'I', 'N', 'K']);
+  const [letter, setLetter] = useState([]);
+  fetchLetters();
   // Function to shuffle the array
+
+ function fetchLetters() {
+    // let letters = [];
+  fetch("https://perquacky-backend.vercel.app/letters")
+  .then(response => response.text())
+  .then((data) => {
+    console.log(data);
+    setLetter(data.split(''));
+  })
+  }
+
+  
 const shuffleArray = (arr: any[]) => {
   return arr
     .map((item) => ({ item, sort: Math.random() }))
@@ -172,7 +185,7 @@ const shuffleArray = (arr: any[]) => {
 };
 
 const handleLetterClick =  (letter: string) => {
-  props.setWord((prevWord) => prevWord + letter);
+  props.setWord((prevWord: string) => prevWord + letter);
 }
 
 const handleShuffleClick = () => {
