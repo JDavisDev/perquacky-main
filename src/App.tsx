@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Key, useState } from 'react'
+import { Key, useEffect, useState } from 'react'
 import './App.css'
 import Timer from './Timer'
 import dictImport from '../src/assets/masterWordList.txt'
@@ -163,7 +163,9 @@ export default function App() {
 
 function LettersGrid(props) {
   const [letter, setLetter] = useState([]);
-  fetchLetters();
+  useEffect(() => {
+    fetchLetters();
+  });
   // Function to shuffle the array
 
  function fetchLetters() {
