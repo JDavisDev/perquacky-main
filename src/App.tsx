@@ -138,7 +138,7 @@ export default function App() {
 
   return (
     <>
-      <LettersGrid setWord = { setWord } letters = {letters} setLetters={setLetters}/>
+      <LettersGrid setWord = { setWord } word={word} letters = {letters} setLetters={setLetters}/>
       <WordInputField word={word} onLetterClick={onLetterClick} clearWord={clearWord} submitWord={submitWord}/>
       <WordHistory wordHistory={submittedWords} />
       <Timer onTimerEnd={onTimerEnd} onResetClicked={clearStats}/>
@@ -174,7 +174,7 @@ export default function App() {
 //   );
 // }
 
-function LettersGrid({setWord, letters, setLetters}) {
+function LettersGrid({setWord, word, letters, setLetters}) {
   
 const shuffleArray = (arr: any[]) => {
   return arr
@@ -192,6 +192,11 @@ const handleShuffleClick = () => {
   setLetters(shuffledArray);
 };
 
+function isTileDisabled(item, index) {
+  const wordLetterCount = word.toString().split('').filter((currLetter: string) => currLetter === item).length;
+  return (word.length > 0 && letters.toString().split('').filter((currLetter: string) => currLetter === item).length == wordLetterCount);
+}
+
   return (
     <>
     <button onClick={handleShuffleClick}>
@@ -199,7 +204,7 @@ const handleShuffleClick = () => {
       </button>
       <div className="grid-container" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
     {letters.map((item, index) => (
-      <button key={index} className="grid-cell" style={{ padding: "10px", fontSize: "22px", backgroundColor: "antiquewhite", color: "black", border: "1px solid black" }} onClick={() => handleLetterClick(item)}>
+      <button key={index} className="grid-cell" disabled={isTileDisabled(item, index)} onClick={() => handleLetterClick(item)}>
         {item}
       </button>
     ))}
