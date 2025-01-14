@@ -192,7 +192,7 @@ const handleShuffleClick = () => {
   setLetters(shuffledArray);
 };
 
-function isTileDisabled(item, index) {
+function isTileDisabled(item) {
   const wordLetterCount = word.toString().split('').filter((currLetter: string) => currLetter === item).length;
   return (word.length > 0 && letters.toString().split('').filter((currLetter: string) => currLetter === item).length == wordLetterCount);
 }
@@ -204,7 +204,7 @@ function isTileDisabled(item, index) {
       </button>
       <div className="grid-container" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
     {letters.map((item, index) => (
-      <button key={index} className="grid-cell" disabled={isTileDisabled(item, index)} onClick={() => handleLetterClick(item)}>
+      <button key={index} className="grid-cell" disabled={isTileDisabled(item)} onClick={() => handleLetterClick(item)}>
         {item}
       </button>
     ))}
