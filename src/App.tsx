@@ -1,46 +1,48 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Key, useEffect, useState } from 'react'
-import './App.css'
-import Timer from './Timer'
-import dictImport from '../src/assets/masterWordList.txt'
+import { Key, Suspense, useEffect, useState } from "react";
+import "./App.css";
+import Timer from "./Timer";
+import dictImport from "../src/assets/masterWordList.txt";
+import ModalDialog from "./ModalDialog";
+import { createPortal } from "react-dom";
 
 export default function App() {
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState("");
   const [letters, setLetters] = useState([]);
+  const [hasStarted, setHasStarted] = useState(false);
   const [submittedWords, setSubmittedWords] = useState([]);
   const [threeLetterWordCount, setThreeLetterWordCount] = useState(0);
   const [fourLetterWordCount, setFourLetterWordCount] = useState(0);
   const [fiveLetterWordCount, setFiveLetterWordCount] = useState(0);
   const [sixLetterWordCount, setSixLetterWordCount] = useState(0);
   const [sevenLetterWordCount, setSevenLetterWordCount] = useState(0);
-  const [, setShowDialog] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [, setScore] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       fetch("https://perquacky-backend.vercel.app/letters")
-        .then(response => response.text())
+        .then((response) => response.text())
         .then((data) => {
-        console.log(data);
-        setLetters(data.split(''));
-  })
+          setLetters(data.split(""));
+        });
     };
     fetchData();
   }, []);
 
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
-  let dict = '';
+  let dict = [];
   fetch(dictImport)
-  .then(response => response.text())
-  .then((data) => {
-   dict = data;
-  })
+    .then((response) => response.text())
+    .then((data) => {
+      dict = data.split("\n").map((word) => word.trim().toUpperCase());
+    });
 
   function clearWord() {
-    setWord('');
+    setWord("");
   }
 
   function clearStats() {
@@ -51,27 +53,34 @@ export default function App() {
     setSevenLetterWordCount(0);
     setScore(0);
     setSubmittedWords([]);
-    setWord('');
+    setWord("");
   }
 
   function calculateStats() {
     let tempScore = 0;
     submittedWords.forEach((word) => {
       switch (word.length) {
-        case 3: setThreeLetterWordCount((prevCount) => prevCount + 1);
-        break;
-        case 4: setFourLetterWordCount((prevCount) => prevCount + 1);
-        break;
-        case 5: setFiveLetterWordCount((prevCount) => prevCount + 1);
-        break;
-        case 6: setSixLetterWordCount((prevCount) => prevCount + 1);
-        break;
-        case 7: setSevenLetterWordCount((prevCount) => prevCount + 1);
-        break;
-        case 8: tempScore += 500;
-        break;
-        case 9: tempScore += 1000;
-        break;
+        case 3:
+          setThreeLetterWordCount((prevCount) => prevCount + 1);
+          break;
+        case 4:
+          setFourLetterWordCount((prevCount) => prevCount + 1);
+          break;
+        case 5:
+          setFiveLetterWordCount((prevCount) => prevCount + 1);
+          break;
+        case 6:
+          setSixLetterWordCount((prevCount) => prevCount + 1);
+          break;
+        case 7:
+          setSevenLetterWordCount((prevCount) => prevCount + 1);
+          break;
+        case 8:
+          tempScore += 500;
+          break;
+        case 9:
+          tempScore += 1000;
+          break;
       }
     });
 
@@ -97,7 +106,11 @@ export default function App() {
   function submitWord() {
     // Send the word to the backend
     // add it to word history and store locally for scoring
-    if (word.length > 2 && dict.includes(word) && !submittedWords.includes(word)) {
+    if (
+      word.length > 2 &&
+      dict.includes(word.trim().toUpperCase()) &&
+      !submittedWords.includes(word)
+    ) {
       const update = [...submittedWords, word];
       setSubmittedWords(update);
       clearWord();
@@ -111,18 +124,24 @@ export default function App() {
   function onLetterClick(letter, index) {
     const clickedLetter = word[index];
     if (clickedLetter === letter) {
-      setWord((prevWord) => prevWord.slice(0, index) + prevWord.slice(index + 1));
+      setWord(
+        (prevWord) => prevWord.slice(0, index) + prevWord.slice(index + 1)
+      );
     }
   }
 
   function onTimerEnd() {
     clearWord();
-    setShowDialog(true);
+    setShowModal(true);
   }
+
+  const handleStartClick = () => {
+    setHasStarted(true);
+    clearStats();
+  };
 
   // const Dialog = ({ isOpen, children }) => {
   //   setShowDialog(false);
-
 
   //   return (
   //     <div className="dialog-overlay">
@@ -138,20 +157,41 @@ export default function App() {
 
   return (
     <>
-      <LettersGrid setWord = { setWord } word={word} letters = {letters} setLetters={setLetters}/>
-      <WordInputField word={word} onLetterClick={onLetterClick} clearWord={clearWord} submitWord={submitWord}/>
+      <img src="./public/favicon.ico" alt="Quackle Logo" height="64px" />
+      <br></br>
+      <br></br>
+      <br></br>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LettersGrid
+          setWord={setWord}
+          word={word}
+          letters={letters}
+          setLetters={setLetters}
+          hasStarted={hasStarted}
+        />
+      </Suspense>
+      <WordInputField
+        word={word}
+        onLetterClick={onLetterClick}
+        clearWord={clearWord}
+        submitWord={submitWord}
+      />
       <WordHistory wordHistory={submittedWords} />
-      <Timer onTimerEnd={onTimerEnd} onResetClicked={clearStats}/>
-      <Score submittedWords = {submittedWords} threeLetterWordCount={threeLetterWordCount} />
-      {/* {showDialog ? <Dialog isOpen={showDialog}>
-        <h1 style={{color: 'black'}}>Game Over!</h1>
-        <p>Score</p>
-      </Dialog> : null} */}
+      <Timer onTimerEnd={onTimerEnd} onStartClicked={handleStartClick} />
+      <Score
+        submittedWords={submittedWords}
+        threeLetterWordCount={threeLetterWordCount}
+      />
+      {showModal &&
+        createPortal(
+          <ModalDialog onClose={() => setShowModal(false)} />,
+          document.body
+        )}
     </>
-  )
+  );
 }
 
-// function Share() {  
+// function Share() {
 //   const handleShare = async () => {
 //     if (navigator.share) {
 //       try {
@@ -174,90 +214,140 @@ export default function App() {
 //   );
 // }
 
-function LettersGrid({setWord, word, letters, setLetters}) {
-  
-const shuffleArray = (arr: any[]) => {
-  return arr
-    .map((item) => ({ item, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ item }) => item);
-};
+function LettersGrid({ setWord, word, letters, setLetters, hasStarted }) {
+  const shuffleArray = (arr: any[]) => {
+    return arr
+      .map((item) => ({ item, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ item }) => item);
+  };
 
-const handleLetterClick =  (letter: string) => {
-  setWord((prevWord: string) => prevWord + letter);
-}
+  const handleLetterClick = (letter: string) => {
+    setWord((prevWord: string) => prevWord + letter);
+  };
 
-const handleShuffleClick = () => {
-  const shuffledArray = shuffleArray(letters);
-  setLetters(shuffledArray);
-};
+  const handleShuffleClick = () => {
+    const shuffledArray = shuffleArray(letters);
+    setLetters(shuffledArray);
+  };
 
-function isTileDisabled(item) {
-  const wordLetterCount = word.toString().split('').filter((currLetter: string) => currLetter === item).length;
-  return (word.length > 0 && letters.toString().split('').filter((currLetter: string) => currLetter === item).length == wordLetterCount);
-}
+  function isTileDisabled(item, hasStarted: boolean) {
+    if (!hasStarted) {
+      return true;
+    }
+    const wordLetterCount = word
+      .toString()
+      .split("")
+      .filter((currLetter: string) => currLetter === item).length;
+    return (
+      word.length > 0 &&
+      letters
+        .toString()
+        .split("")
+        .filter((currLetter: string) => currLetter === item).length ==
+        wordLetterCount
+    );
+  }
 
   return (
     <>
-    <button onClick={handleShuffleClick}>
-      Shuffle
+      <button disabled={!hasStarted} onClick={handleShuffleClick}>
+        Shuffle
       </button>
-      <div className="grid-container" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
-    {letters.map((item, index) => (
-      <button key={index} className="grid-cell" disabled={isTileDisabled(item)} onClick={() => handleLetterClick(item)}>
-        {item}
-      </button>
-    ))}
-  </div>
+      <br></br>
+      <br></br>
+      <div
+        className="grid-container"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "10px",
+        }}
+      >
+        {letters.map((item, index) => (
+          <button
+            key={index}
+            className="grid-cell"
+            disabled={isTileDisabled(item, hasStarted)}
+            onClick={() => handleLetterClick(item)}
+          >
+            {hasStarted ? item : "?"}
+          </button>
+        ))}
+      </div>
     </>
   );
-};
+}
 
 function WordInputField({ word, onLetterClick, clearWord, submitWord }) {
-return (
-  <>
-  <div className="scrabble-word">
-    {word.split('').map((letter: string, index: Key) => (
-      <div
-        key={index}
-        className="scrabble-tile"
-        onClick={() => onLetterClick(letter, index)}
-      >
-        {letter.toUpperCase()}
+  return (
+    <>
+      <div className="scrabble-word">
+        {word.split("").map((letter: string, index: Key) => (
+          <div
+            key={index}
+            className="scrabble-tile"
+            onClick={() => onLetterClick(letter, index)}
+          >
+            {letter.toUpperCase()}
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-  <input style={{ padding: "4px", width:"auto", height: "50px", marginRight:"20px", fontSize:"14px"}}type="reset" value="Clear" alt="Clear the search form" onClick={clearWord}></input>
-  <input style={{ padding: "4px", width:"auto", height: "50px", fontSize:"14px"}}type="submit" value="Submit" onClick={submitWord}></input>
-  </>
-);
+      <input
+        style={{
+          padding: "4px",
+          width: "auto",
+          height: "50px",
+          marginRight: "20px",
+          fontSize: "14px",
+        }}
+        type="reset"
+        value="Clear"
+        alt="Clear the search form"
+        onClick={clearWord}
+      ></input>
+      <input
+        style={{
+          padding: "4px",
+          width: "auto",
+          height: "50px",
+          fontSize: "14px",
+        }}
+        type="submit"
+        value="Submit"
+        onClick={submitWord}
+      ></input>
+    </>
+  );
 }
 
-function WordHistory({ wordHistory}) {
-return (
-  <div>
-    {wordHistory.map((word) => (
-      <p key={word}>{word}</p>
-    ))}
-  </div>
-);
+function WordHistory({ wordHistory }) {
+  return (
+    <div>
+      {wordHistory.map((word) => (
+        <p key={word}>{word}</p>
+      ))}
+    </div>
+  );
 }
 
-function Score({submittedWords, threeLetterWordCount}) {
+function Score({ submittedWords, threeLetterWordCount }) {
   let newScore = 0;
   for (const element of submittedWords) {
-    newScore = newScore + element.length **2;
+    newScore = newScore + element.length ** 2;
   }
-return (
-  <div>
-    <p>Score: {newScore}</p>
-    <p>Words: {submittedWords.length}</p>
-    <p style={{color: threeLetterWordCount >= 3 ? 'green' : 'gray'}}>3 letter words</p>
-    <p style={{color: false ? 'green' : 'gray'}}>4 letter words</p>
-    <p style={{color: false ? 'green' : 'gray'}}>5 letter words</p>
-    <p style={{color: false ? 'green' : 'gray'}}>6 letter words</p>
-    <p style={{color: false ? 'green' : 'gray'}}>7 letter words</p>
-    <p style={{color: false ? 'green' : 'gray'}}>8 letter words</p>
-  </div>
-);
+  return (
+    <div>
+      <p>Score: {newScore}</p>
+      <p>Words: {submittedWords.length}</p>
+      <p style={{ color: threeLetterWordCount >= 3 ? "green" : "gray" }}>
+        3 letter words
+      </p>
+      <p style={{ color: false ? "green" : "gray" }}>4 letter words</p>
+      <p style={{ color: false ? "green" : "gray" }}>5 letter words</p>
+      <p style={{ color: false ? "green" : "gray" }}>6 letter words</p>
+      <p style={{ color: false ? "green" : "gray" }}>7 letter words</p>
+      <p style={{ color: false ? "green" : "gray" }}>8 letter words</p>
+    </div>
+  );
 }

@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-export default function Timer({onTimerEnd, onResetClicked}) {
+export default function Timer({onTimerEnd, onStartClicked}) {
   // We need ref in this, because we are dealing
   // with JS setInterval to keep track of it and
   // stop it when needed
+
   const Ref = useRef(null);
 
   // The state for our timer
@@ -42,6 +43,11 @@ export default function Timer({onTimerEnd, onResetClicked}) {
     }
   };
 
+  function handleStart() {
+    onStartClicked();
+    clearTimer(getDeadTime());
+  }
+
   const clearTimer = (e) => {
     // If you adjust it you should also need to
     // adjust the Endtime formula we are about
@@ -67,20 +73,11 @@ export default function Timer({onTimerEnd, onResetClicked}) {
     return deadline;
   };
 
-  // Another way to call the clearTimer() to start
-  // the countdown is via action event from the
-  // button first we create function to be called
-  // by the button
-  const onClickReset = () => {
-    clearTimer(getDeadTime());
-    onResetClicked();
-  };
-
   return (
     <div style={{ textAlign: "center", margin: "auto" }}>
+      <button onClick={handleStart}>Start</button>
       <h3>Time</h3>
       <h4>{timer}</h4>
-      <button onClick={onClickReset}>Reset</button>
     </div>
   );
 }
