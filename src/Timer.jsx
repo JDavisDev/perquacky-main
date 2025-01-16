@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-export default function Timer({onTimerEnd, onStartClicked}) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRandom } from "@fortawesome/free-solid-svg-icons";
+
+export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, hasStarted}) {
   // We need ref in this, because we are dealing
   // with JS setInterval to keep track of it and
   // stop it when needed
@@ -7,7 +10,7 @@ export default function Timer({onTimerEnd, onStartClicked}) {
   const Ref = useRef(null);
 
   // The state for our timer
-  const [timer, setTimer] = useState("00:00:00");
+  const [timer, setTimer] = useState("60");
   const [didEnd, setDidEnd] = useState(false);
 
   const getTimeRemaining = (e) => {
@@ -30,15 +33,11 @@ export default function Timer({onTimerEnd, onStartClicked}) {
       // check if less than 10 then we need to
       // add '0' at the beginning of the variable
       setTimer(
-        (hours > 9 ? hours : "0" + hours) +
-          ":" +
-          (minutes > 9 ? minutes : "0" + minutes) +
-          ":" +
           (seconds > 9 ? seconds : "0" + seconds)
       );
     } else if (!didEnd) {
       setDidEnd(true);
-      setTimer("00:00:00");
+      setTimer("00");
       // onTimerEnd();
     }
   };
@@ -52,7 +51,7 @@ export default function Timer({onTimerEnd, onStartClicked}) {
     // If you adjust it you should also need to
     // adjust the Endtime formula we are about
     // to code next
-    setTimer("00:00:60");
+    setTimer("60");
 
     // If you try to remove this line the
     // updating of timer Variable will be
@@ -74,10 +73,15 @@ export default function Timer({onTimerEnd, onStartClicked}) {
   };
 
   return (
-    <div style={{ textAlign: "center", margin: "auto" }}>
-      <button onClick={handleStart}>Start</button>
-      <h3>Time</h3>
-      <h4>{timer}</h4>
+    <div>
+    {!hasStarted ? <button className="start" onClick={handleStart}>Start</button> : null }
+    <div className="top-button-container">
+    <button className="shuffle-button" onClick={handleShuffleClick}>
+      <FontAwesomeIcon icon={faRandom} className="shuffle-icon" />
+    </button>
+      <button className="score">1,280</button>
+      <button className="time">{timer}</button>
+    </div>
     </div>
   );
 }

@@ -140,6 +140,15 @@ export default function App() {
     clearStats();
   };
 
+  function handleShuffleClick() {
+    const arr = letters;
+    const shuffledArray = arr
+      .map((item) => ({ item, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ item }) => item);
+    setLetters(shuffledArray);
+  }
+
   // const Dialog = ({ isOpen, children }) => {
   //   setShowDialog(false);
 
@@ -157,31 +166,33 @@ export default function App() {
 
   return (
     <>
-      <img src="./public/favicon.ico" alt="Quackle Logo" height="64px" />
+      <img src="./src/assets/quackle.png" alt="Quackle Logo" height="64px" />
       <br></br>
       <br></br>
       <br></br>
+      <Timer
+        onTimerEnd={onTimerEnd}
+        onStartClicked={handleStartClick}
+        handleShuffleClick={handleShuffleClick}
+        hasStarted={hasStarted}
+      />
+      {hasStarted && word.length > 0 ? (
+        <WordInputField
+          word={word}
+          onLetterClick={onLetterClick}
+          clearWord={clearWord}
+          submitWord={submitWord}
+        />
+      ) : null}
       <Suspense fallback={<div>Loading...</div>}>
         <LettersGrid
           setWord={setWord}
           word={word}
           letters={letters}
-          setLetters={setLetters}
           hasStarted={hasStarted}
         />
       </Suspense>
-      <WordInputField
-        word={word}
-        onLetterClick={onLetterClick}
-        clearWord={clearWord}
-        submitWord={submitWord}
-      />
       <WordHistory wordHistory={submittedWords} />
-      <Timer onTimerEnd={onTimerEnd} onStartClicked={handleStartClick} />
-      <Score
-        submittedWords={submittedWords}
-        threeLetterWordCount={threeLetterWordCount}
-      />
       {showModal &&
         createPortal(
           <ModalDialog onClose={() => setShowModal(false)} />,
@@ -214,21 +225,9 @@ export default function App() {
 //   );
 // }
 
-function LettersGrid({ setWord, word, letters, setLetters, hasStarted }) {
-  const shuffleArray = (arr: any[]) => {
-    return arr
-      .map((item) => ({ item, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ item }) => item);
-  };
-
+function LettersGrid({ setWord, word, letters, hasStarted }) {
   const handleLetterClick = (letter: string) => {
     setWord((prevWord: string) => prevWord + letter);
-  };
-
-  const handleShuffleClick = () => {
-    const shuffledArray = shuffleArray(letters);
-    setLetters(shuffledArray);
   };
 
   function isTileDisabled(item, hasStarted: boolean) {
@@ -251,19 +250,9 @@ function LettersGrid({ setWord, word, letters, setLetters, hasStarted }) {
 
   return (
     <>
-      <button disabled={!hasStarted} onClick={handleShuffleClick}>
-        Shuffle
-      </button>
       <br></br>
       <br></br>
-      <div
-        className="grid-container"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "10px",
-        }}
-      >
+      <div className="grid-container">
         {letters.map((item, index) => (
           <button
             key={index}
@@ -293,30 +282,12 @@ function WordInputField({ word, onLetterClick, clearWord, submitWord }) {
           </div>
         ))}
       </div>
-      <input
-        style={{
-          padding: "4px",
-          width: "auto",
-          height: "50px",
-          marginRight: "20px",
-          fontSize: "14px",
-        }}
-        type="reset"
-        value="Clear"
-        alt="Clear the search form"
-        onClick={clearWord}
-      ></input>
-      <input
-        style={{
-          padding: "4px",
-          width: "auto",
-          height: "50px",
-          fontSize: "14px",
-        }}
-        type="submit"
-        value="Submit"
-        onClick={submitWord}
-      ></input>
+      <button className="clear" onClick={clearWord}>
+        X
+      </button>
+      <button className="submit" onClick={submitWord}>
+        Submit
+      </button>
     </>
   );
 }

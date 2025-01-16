@@ -3,6 +3,10 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  align-self: center;
 }
 
 html,
@@ -14,17 +18,16 @@ body {
 
 .grid-container {
   display: grid;
-  align-items: center;
-  align-self: center;
   max-width:min-content;
   grid-template-columns: repeat(3, 1fr); /* Adjust for the number of columns */
   gap: 10px;
 }
 
 .grid-cell {
+  align-self: center;
   overflow: hidden;
-  width: 70px;
-  height: 70px;
+  width: 104px;
+  height: 104px;
   text-align: center;
   padding: 10px;
   font-size: 22px;
@@ -44,26 +47,28 @@ body {
 .scrabble-word {
   display: flex;
   width: auto;
-  padding-top: 40px;
+  margin: 16px;
   align-items: center;
-  gap: 2px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 4px solid white;
+  background-color: rgba(66, 24, 0, 0.267);
 }
 
 .scrabble-tile {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #333;
+  border: 4px solid #333;
   border-radius: 12px;
   background-color: #ffffff;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   color: #333;
   cursor: pointer;
   user-select: none;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .scrabble-tile:hover {
@@ -87,4 +92,90 @@ body {
   background-color: white;
   padding: 20px;
   border-radius: 5px;
+}
+
+.start {
+  border-radius: 8px;
+  width: auto;
+  align-items: center;
+  padding-right: 32px;
+  padding-left: 32px;
+  padding-top: 8px;
+  padding-bottom: 12px;
+  font-size: 48px;
+  background-color: rgba(0, 0, 0, 0.918);
+}
+
+.top-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  margin-top: 16px;
+}
+
+.time {
+  align-content: center;
+  align-self: center;
+  border-radius: 8px;
+  margin-right: 16px;
+  width: auto;
+  padding: 14px;
+  font-size: 32px;
+  background-color: rgba(255, 62, 48, 0.918);
+  display: inline-block;
+}
+
+.score {
+  align-content: center;
+  align-self: center;
+  border-radius: 8px;
+  width: auto;
+  padding: 14px;
+  margin-right: 16px;
+  font-size: 32px;
+  background-color: rgba(0, 146, 37, 0.918);
+  display: inline-block;
+}
+
+.shuffle-button {
+  align-self: center;
+  justify-content: center;
+  align-content: center;
+  display: inline-block;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  margin-right: 16px;
+}
+
+.shuffle-icon {
+  height: 48px;
+  width: 48px;
+}
+
+.clear {
+  align-content: center;
+  align-self: center;
+  border-radius: 8px;
+  width: auto;
+  height: auto;
+  padding-top: 6px; padding-bottom: 6px;
+  padding: 12px;
+  margin-right: 16px;
+  font-size: 32px;
+  background-color: rgba(163, 163, 163, 0.918);
+  display: inline-block;
+}
+
+.submit {
+  align-content: center;
+  align-self: center;
+  border-radius: 8px;
+  width: auto;
+  padding: 14px;
+  margin-right: 16px;
+  font-size: 32px;
+  background-color: rgba(0, 203, 230, 0.918);
+  display: inline-block;
 }
