@@ -1,6 +1,3 @@
-/* eslint-disable no-constant-condition */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Key, Suspense, useEffect, useState } from "react";
 import "./App.css";
 import Timer from "./Timer";
@@ -302,23 +299,23 @@ function WordHistory({ wordHistory }) {
   );
 }
 
-function Score({ submittedWords, threeLetterWordCount }) {
-  let newScore = 0;
-  for (const element of submittedWords) {
-    newScore = newScore + element.length ** 2;
-  }
-  return (
-    <div>
-      <p>Score: {newScore}</p>
-      <p>Words: {submittedWords.length}</p>
-      <p style={{ color: threeLetterWordCount >= 3 ? "green" : "gray" }}>
-        3 letter words
-      </p>
-      <p style={{ color: false ? "green" : "gray" }}>4 letter words</p>
-      <p style={{ color: false ? "green" : "gray" }}>5 letter words</p>
-      <p style={{ color: false ? "green" : "gray" }}>6 letter words</p>
-      <p style={{ color: false ? "green" : "gray" }}>7 letter words</p>
-      <p style={{ color: false ? "green" : "gray" }}>8 letter words</p>
-    </div>
-  );
-}
+// function Score({ submittedWords, threeLetterWordCount }) {
+//   let newScore = 0;
+//   for (const element of submittedWords) {
+//     newScore = newScore + element.length ** 2;
+//   }
+//   return (
+//     <div>
+//       <p>Score: {newScore}</p>
+//       <p>Words: {submittedWords.length}</p>
+//       <p style={{ color: threeLetterWordCount >= 3 ? "green" : "gray" }}>
+//         3 letter words
+//       </p>
+//       <p style={{ color: false ? "green" : "gray" }}>4 letter words</p>
+//       <p style={{ color: false ? "green" : "gray" }}>5 letter words</p>
+//       <p style={{ color: false ? "green" : "gray" }}>6 letter words</p>
+//       <p style={{ color: false ? "green" : "gray" }}>7 letter words</p>
+//       <p style={{ color: false ? "green" : "gray" }}>8 letter words</p>
+//     </div>
+//   );
+// }
