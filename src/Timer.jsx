@@ -79,8 +79,8 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
     <button className="shuffle-button" onClick={handleShuffleClick}>
       <FontAwesomeIcon icon={faRandom} className="shuffle-icon" />
     </button>
-      <button className="score">1,280</button>
-      <button className="time">{timer}</button>
+    <button className="time">{timer}</button>
+    <button className="score">1,280</button>
     </div>
     </div>
   );

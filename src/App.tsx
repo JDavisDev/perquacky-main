@@ -4,6 +4,7 @@ import Timer from "./Timer";
 import dictImport from "../src/assets/masterWordList.txt";
 import ModalDialog from "./ModalDialog";
 import { createPortal } from "react-dom";
+import logo from "./assets/quackle.png";
 
 export default function App() {
   const [word, setWord] = useState("");
@@ -163,7 +164,7 @@ export default function App() {
 
   return (
     <>
-      <img src="./src/assets/quackle.png" alt="Quackle Logo" height="64px" />
+      <img src={logo} alt="Quackle Logo" height="64px" />
       <br></br>
       <br></br>
       <br></br>
@@ -173,20 +174,15 @@ export default function App() {
         handleShuffleClick={handleShuffleClick}
         hasStarted={hasStarted}
       />
-      {hasStarted && word.length > 0 ? (
-        <WordInputField
-          word={word}
-          onLetterClick={onLetterClick}
-          clearWord={clearWord}
-          submitWord={submitWord}
-        />
-      ) : null}
-      <Suspense fallback={<div>Loading...</div>}>
+      <WordInputField word={word} onLetterClick={onLetterClick} />
+      <Suspense fallback={<h2>Loading...</h2>}>
         <LettersGrid
           setWord={setWord}
           word={word}
           letters={letters}
           hasStarted={hasStarted}
+          clearWord={clearWord}
+          submitWord={submitWord}
         />
       </Suspense>
       <WordHistory wordHistory={submittedWords} />
@@ -222,7 +218,14 @@ export default function App() {
 //   );
 // }
 
-function LettersGrid({ setWord, word, letters, hasStarted }) {
+function LettersGrid({
+  setWord,
+  word,
+  letters,
+  hasStarted,
+  clearWord,
+  submitWord,
+}) {
   const handleLetterClick = (letter: string) => {
     setWord((prevWord: string) => prevWord + letter);
   };
@@ -247,8 +250,6 @@ function LettersGrid({ setWord, word, letters, hasStarted }) {
 
   return (
     <>
-      <br></br>
-      <br></br>
       <div className="grid-container">
         {letters.map((item, index) => (
           <button
@@ -261,11 +262,18 @@ function LettersGrid({ setWord, word, letters, hasStarted }) {
           </button>
         ))}
       </div>
+      <br></br>
+      <button className="clear" onClick={clearWord}>
+        X
+      </button>
+      <button className="submit" onClick={submitWord}>
+        Submit
+      </button>
     </>
   );
 }
 
-function WordInputField({ word, onLetterClick, clearWord, submitWord }) {
+function WordInputField({ word, onLetterClick }) {
   return (
     <>
       <div className="scrabble-word">
@@ -279,12 +287,6 @@ function WordInputField({ word, onLetterClick, clearWord, submitWord }) {
           </div>
         ))}
       </div>
-      <button className="clear" onClick={clearWord}>
-        X
-      </button>
-      <button className="submit" onClick={submitWord}>
-        Submit
-      </button>
     </>
   );
 }
