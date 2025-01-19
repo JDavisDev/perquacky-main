@@ -56,9 +56,9 @@ export default function App() {
     setWord("");
   }
 
-  function calculateStats() {
+  function calculateStats(update: string[]) {
     let tempScore = 0;
-    submittedWords.forEach((word) => {
+    update.forEach((word) => {
       switch (word.length) {
         case 3:
           setThreeLetterWordCount((prevCount) => prevCount + 1);
@@ -114,7 +114,7 @@ export default function App() {
       const update = [...submittedWords, word];
       setSubmittedWords(update);
       clearWord();
-      calculateStats();
+      calculateStats(update);
     } else {
       // show error or highlight the input field
       // setSubmittedWords([...submittedWords, 'Invalid word']);

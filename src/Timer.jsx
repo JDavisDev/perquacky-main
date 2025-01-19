@@ -38,7 +38,7 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
     } else if (!didEnd) {
       setDidEnd(true);
       setTimer("00");
-      onTimerEnd();
+      // onTimerEnd();
     }
   };
 
@@ -68,7 +68,7 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
 
     // This is where you need to adjust if
     // you entend to add more time
-    deadline.setSeconds(deadline.getSeconds() + 60);
+    deadline.setSeconds(deadline.getSeconds() + 90);
     return deadline;
   };
 
