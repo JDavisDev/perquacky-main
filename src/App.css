@@ -143,6 +143,7 @@ body {
   margin-right: 16px;
   width: 100px;
   padding: 14px;
+  color: white;
   font-size: 32px;
   background-color: rgba(255, 62, 48, 0.918);
   display: inline-block;
@@ -155,6 +156,7 @@ body {
   width: 100px;
   padding: 14px;
   margin-right: 16px;
+  color: white;
   font-size: 32px;
   background-color: rgba(0, 146, 37, 0.918);
   display: inline-block;
@@ -190,6 +192,7 @@ body {
   padding-left: 24px;
   margin-right: 16px;
   font-size: 32px;
+  color: white;
   background-color: rgba(163, 163, 163, 0.918);
   display: inline-block;
 }
@@ -202,6 +205,7 @@ body {
   padding: 14px;
   margin-right: 16px;
   font-size: 32px;
+  color: white;
   background-color: rgba(0, 203, 230, 0.918);
   display: inline-block;
 }
