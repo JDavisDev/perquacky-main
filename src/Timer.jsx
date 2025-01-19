@@ -10,7 +10,7 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
   const Ref = useRef(null);
 
   // The state for our timer
-  const [timer, setTimer] = useState("60");
+  const [timer, setTimer] = useState("90");
   const [didEnd, setDidEnd] = useState(false);
 
   const getTimeRemaining = (e) => {
@@ -38,7 +38,7 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
     } else if (!didEnd) {
       setDidEnd(true);
       setTimer("00");
-      // onTimerEnd();
+      onTimerEnd();
     }
   };
 
@@ -51,7 +51,7 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
     // If you adjust it you should also need to
     // adjust the Endtime formula we are about
     // to code next
-    setTimer("60");
+    setTimer("90");
 
     // If you try to remove this line the
     // updating of timer Variable will be
@@ -74,13 +74,13 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
 
   return (
     <div>
-    {!hasStarted ? <button className="start" onClick={handleStart}>Start</button> : null }
+    {!hasStarted ? <button className="start" onClick={handleStart}>Start</button> : <><br></br></> }
     <div className="top-button-container">
     <button className="shuffle-button" onClick={handleShuffleClick}>
       <FontAwesomeIcon icon={faRandom} className="shuffle-icon" />
     </button>
     <button className="time">{timer}</button>
-    <button className="score">1,280</button>
+    <button className="score">0000</button>
     </div>
     </div>
   );

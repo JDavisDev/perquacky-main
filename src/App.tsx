@@ -5,6 +5,8 @@ import dictImport from "../src/assets/masterWordList.txt";
 import ModalDialog from "./ModalDialog";
 import { createPortal } from "react-dom";
 import logo from "./assets/quackle.png";
+import WordHistory from "./WordHistory";
+import ScoreSection from "./ScoreSection";
 
 export default function App() {
   const [word, setWord] = useState("");
@@ -102,10 +104,10 @@ export default function App() {
   }
 
   function submitWord() {
-    // Send the word to the backend
     // add it to word history and store locally for scoring
     if (
       word.length > 2 &&
+      hasStarted &&
       dict.includes(word.trim().toUpperCase()) &&
       !submittedWords.includes(word)
     ) {
@@ -116,10 +118,11 @@ export default function App() {
     } else {
       // show error or highlight the input field
       // setSubmittedWords([...submittedWords, 'Invalid word']);
+      clearWord();
     }
   }
 
-  function onLetterClick(letter, index) {
+  function onLetterClick(letter: string, index: number) {
     const clickedLetter = word[index];
     if (clickedLetter === letter) {
       setWord(
@@ -131,6 +134,7 @@ export default function App() {
   function onTimerEnd() {
     clearWord();
     setShowModal(true);
+    setHasStarted(false);
   }
 
   const handleStartClick = () => {
@@ -164,28 +168,40 @@ export default function App() {
 
   return (
     <>
-      <img src={logo} alt="Quackle Logo" height="64px" />
-      <br></br>
-      <br></br>
-      <br></br>
-      <Timer
-        onTimerEnd={onTimerEnd}
-        onStartClicked={handleStartClick}
-        handleShuffleClick={handleShuffleClick}
-        hasStarted={hasStarted}
-      />
-      <WordInputField word={word} onLetterClick={onLetterClick} />
       <Suspense fallback={<h2>Loading...</h2>}>
-        <LettersGrid
-          setWord={setWord}
-          word={word}
-          letters={letters}
-          hasStarted={hasStarted}
-          clearWord={clearWord}
-          submitWord={submitWord}
-        />
+        <div className="content">
+          <ScoreSection
+            threeLetterWordCount={threeLetterWordCount}
+            fourLetterWordCount={fourLetterWordCount}
+            fiveLetterWordCount={fiveLetterWordCount}
+            sixLetterWordCount={sixLetterWordCount}
+            sevenLetterWordCount={sevenLetterWordCount}
+            submittedWords={submittedWords}
+          ></ScoreSection>
+          <div className="column-content">
+            <img src={logo} alt="Quackle Logo" height="64px" />
+            <br></br>
+            <br></br>
+            <br></br>
+            <Timer
+              onTimerEnd={onTimerEnd}
+              onStartClicked={handleStartClick}
+              handleShuffleClick={handleShuffleClick}
+              hasStarted={hasStarted}
+            />
+            <WordInputField word={word} onLetterClick={onLetterClick} />
+            <LettersGrid
+              setWord={setWord}
+              word={word}
+              letters={letters}
+              hasStarted={hasStarted}
+              clearWord={clearWord}
+              submitWord={submitWord}
+            />
+          </div>
+          <WordHistory submittedWords={submittedWords} />
+        </div>
       </Suspense>
-      <WordHistory wordHistory={submittedWords} />
       {showModal &&
         createPortal(
           <ModalDialog onClose={() => setShowModal(false)} />,
@@ -263,12 +279,14 @@ function LettersGrid({
         ))}
       </div>
       <br></br>
-      <button className="clear" onClick={clearWord}>
-        X
-      </button>
-      <button className="submit" onClick={submitWord}>
-        Submit
-      </button>
+      <span>
+        <button className="clear" onClick={clearWord}>
+          X
+        </button>
+        <button className="submit" onClick={submitWord}>
+          Submit
+        </button>
+      </span>
     </>
   );
 }
@@ -288,16 +306,6 @@ function WordInputField({ word, onLetterClick }) {
         ))}
       </div>
     </>
-  );
-}
-
-function WordHistory({ wordHistory }) {
-  return (
-    <div>
-      {wordHistory.map((word) => (
-        <p key={word}>{word}</p>
-      ))}
-    </div>
   );
 }
 
