@@ -58,6 +58,11 @@ export default function App() {
 
   function calculateStats(update: string[]) {
     let tempScore = 0;
+    setThreeLetterWordCount(0);
+    setFourLetterWordCount(0);
+    setFiveLetterWordCount(0);
+    setSixLetterWordCount(0);
+    setSevenLetterWordCount(0);
     update.forEach((word) => {
       switch (word.length) {
         case 3:

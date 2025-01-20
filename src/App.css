@@ -1,6 +1,6 @@
 #root {
   height: 100%;
-  max-width: auto;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -13,15 +13,12 @@
 html,
 body {
   min-height: 100%;
+  width: 100%;
   margin: 0;
   overflow: hidden;
 }
 
 .column-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   align-content: center;
   align-self: center;
 }
@@ -31,24 +28,20 @@ body {
 }
 
 .word-history-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  align-self: center;
+  justify-content: start;
+  align-items: start;
   margin-top: 8px;
   margin-bottom: 16px;
 }
 
 .word-history-row {
-  display: flex;
   margin-top: 1px;
 }
 
 .score-section {
   display: flex;
-  justify-content: center;
+  justify-content: end;
+  margin-right: 10%;
   align-items: center;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -56,7 +49,7 @@ body {
 
 .grid-container {
   display: grid;
-  max-width:min-content;
+  max-width:100%;
   grid-template-columns: repeat(3, 1fr); /* Adjust for the number of columns */
   gap: 10px;
 }

@@ -21,9 +21,11 @@ export default function ScoreSection({
 }
 
 function getDots(count) {
-  console.log(count);
-  return "•".repeat(3);
-  // const filledDots = "•".repeat(count);
-  // const emptyDots = "○".repeat(3 - count);
-  // return filledDots + emptyDots;
+  if (count <= 3) {
+    const filledDots = "•".repeat(count);
+    const emptyDots = "○".repeat(3 - count);
+    return filledDots + emptyDots;
+  } else {
+    return "•".repeat(3);
+  }
 }
