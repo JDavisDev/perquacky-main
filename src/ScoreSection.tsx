@@ -21,7 +21,9 @@ export default function ScoreSection({
 }
 
 function getDots(count) {
-  const filledDots = "•".repeat(count);
-  const emptyDots = "○".repeat(3 - count);
-  return filledDots + emptyDots;
+  console.log(count);
+  return "•".repeat(3);
+  // const filledDots = "•".repeat(count);
+  // const emptyDots = "○".repeat(3 - count);
+  // return filledDots + emptyDots;
 }
