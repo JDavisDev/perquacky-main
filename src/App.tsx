@@ -4,7 +4,6 @@ import Timer from "./Timer";
 import dictImport from "../src/assets/masterWordList.txt";
 import ModalDialog from "./ModalDialog";
 import { createPortal } from "react-dom";
-import logo from "./assets/quackle.png";
 import WordHistory from "./WordHistory";
 import ScoreSection from "./ScoreSection";
 
@@ -19,7 +18,7 @@ export default function App() {
   const [sixLetterWordCount, setSixLetterWordCount] = useState(0);
   const [sevenLetterWordCount, setSevenLetterWordCount] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [, setScore] = useState(0);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,22 +62,34 @@ export default function App() {
     setFiveLetterWordCount(0);
     setSixLetterWordCount(0);
     setSevenLetterWordCount(0);
+
+    let threeLetterCount = 0;
+    let fourLetterCount = 0;
+    let fiveLetterCount = 0;
+    let sixLetterCount = 0;
+    let sevenLetterCount = 0;
+
     update.forEach((word) => {
       switch (word.length) {
         case 3:
-          setThreeLetterWordCount((prevCount) => prevCount + 1);
+          threeLetterCount++;
+          tempScore += 10;
           break;
         case 4:
-          setFourLetterWordCount((prevCount) => prevCount + 1);
+          fourLetterCount++;
+          tempScore += 20;
           break;
         case 5:
-          setFiveLetterWordCount((prevCount) => prevCount + 1);
+          fiveLetterCount++;
+          tempScore += 40;
           break;
         case 6:
-          setSixLetterWordCount((prevCount) => prevCount + 1);
+          sixLetterCount++;
+          tempScore += 80;
           break;
         case 7:
-          setSevenLetterWordCount((prevCount) => prevCount + 1);
+          sevenLetterCount++;
+          tempScore += 200;
           break;
         case 8:
           tempScore += 500;
@@ -89,22 +100,36 @@ export default function App() {
       }
     });
 
-    if (threeLetterWordCount === 3) {
+    setThreeLetterWordCount(threeLetterCount);
+    setFourLetterWordCount(fourLetterCount);
+    setFiveLetterWordCount(fiveLetterCount);
+    setSixLetterWordCount(sixLetterCount);
+    setSevenLetterWordCount(sevenLetterCount);
+
+    if (threeLetterCount >= 3) {
       tempScore += 100;
     }
-    if (fourLetterWordCount === 3) {
+    if (fourLetterWordCount >= 3) {
       tempScore += 200;
     }
-    if (fiveLetterWordCount === 3) {
+    if (fiveLetterWordCount >= 3) {
       tempScore += 300;
     }
-    if (sixLetterWordCount === 3) {
+    if (sixLetterWordCount >= 3) {
       tempScore += 400;
     }
-    if (sevenLetterWordCount === 3) {
+    if (sevenLetterWordCount >= 3) {
       tempScore += 500;
     }
-
+    if (
+      threeLetterCount > 0 &&
+      fourLetterCount > 0 &&
+      fiveLetterCount > 0 &&
+      sixLetterCount > 0 &&
+      sevenLetterCount > 0
+    ) {
+      tempScore += 1000;
+    }
     setScore(tempScore);
   }
 
@@ -181,18 +206,14 @@ export default function App() {
             fiveLetterWordCount={fiveLetterWordCount}
             sixLetterWordCount={sixLetterWordCount}
             sevenLetterWordCount={sevenLetterWordCount}
-            submittedWords={submittedWords}
           ></ScoreSection>
           <div className="column-content">
-            <img src={logo} alt="Quackle Logo" height="64px" />
-            <br></br>
-            <br></br>
-            <br></br>
             <Timer
               onTimerEnd={onTimerEnd}
               onStartClicked={handleStartClick}
               handleShuffleClick={handleShuffleClick}
               hasStarted={hasStarted}
+              score={score}
             />
             <WordInputField word={word} onLetterClick={onLetterClick} />
             <LettersGrid
@@ -207,6 +228,7 @@ export default function App() {
           <WordHistory submittedWords={submittedWords} />
         </div>
       </Suspense>
+      {/* <img src={logo} alt="Quackle Logo" height="128px" /> */}
       {showModal &&
         createPortal(
           <ModalDialog onClose={() => setShowModal(false)} />,

@@ -4,7 +4,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  align-items: center;
+  align-items: flex-start;
   align-content: center;
   justify-content: center;
   align-self: center;
@@ -21,30 +21,32 @@ body {
 .column-content {
   align-content: center;
   align-self: center;
+  align-items: flex-start;
 }
+
 .content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
+.stats-column {
+  margin-top: 16px;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.word-history-column {
+  margin-top: 16px;
+}
+
 .word-history-column {
   justify-content: start;
-  align-items: start;
-  margin-top: 8px;
+  align-items: flex-start;
   margin-bottom: 16px;
 }
 
 .word-history-row {
   margin-top: 1px;
-}
-
-.score-section {
-  display: flex;
-  justify-content: end;
-  margin-right: 10%;
-  align-items: center;
-  margin-top: 16px;
-  margin-bottom: 16px;
 }
 
 .grid-container {
@@ -111,7 +113,7 @@ body {
 
 .start {
   border-radius: 8px;
-  width: auto;
+  width: 55%;
   align-items: center;
   padding-right: 32px;
   padding-left: 32px;
@@ -138,7 +140,7 @@ body {
   padding: 14px;
   color: white;
   font-size: 32px;
-  background-color: rgba(255, 62, 48, 0.918);
+  background-color: #ff3e30ea;
   display: inline-block;
 }
 
@@ -146,9 +148,8 @@ body {
   align-content: center;
   align-self: center;
   border-radius: 8px;
-  width: 100px;
+  width: 30%;
   padding: 14px;
-  margin-right: 16px;
   color: white;
   font-size: 32px;
   background-color: rgba(0, 146, 37, 0.918);
@@ -176,8 +177,9 @@ body {
 .clear {
   align-content: center;
   align-self: center;
+  justify-content: center;
   border-radius: 8px;
-  width: auto;
+  width: 45%;
   height: auto;
   padding-top: 14px; 
   padding-bottom: 14px;
@@ -193,8 +195,10 @@ body {
 .submit {
   align-content: center;
   align-self: center;
+  justify-content: center;
   border-radius: 8px;
-  width: auto;
+  width: 45%;
+  height: auto;
   padding: 14px;
   margin-right: 16px;
   font-size: 32px;
