@@ -4,7 +4,6 @@ import Timer from "./Timer";
 import dictImport from "../src/assets/masterWordList.txt";
 import ModalDialog from "./ModalDialog";
 import { createPortal } from "react-dom";
-import ScoreSection from "./ScoreSection";
 import WordInput from "./WordInput";
 import LettersGrid from "./LettersGrid";
 
@@ -107,7 +106,7 @@ export default function App() {
     setSixLetterWordCount(sixLetterCount);
     setSevenLetterWordCount(sevenLetterCount);
 
-    if (threeLetterCount >= 3) {
+    if (threeLetterWordCount >= 3) {
       tempScore += 100;
     }
     if (fourLetterWordCount >= 3) {
@@ -185,12 +184,12 @@ export default function App() {
     <>
       <Suspense fallback={<h2>Loading...</h2>}>
         <div className="content">
-          <ScoreSection
-            threeLetterWordCount={threeLetterWordCount}
-            fourLetterWordCount={fourLetterWordCount}
-            fiveLetterWordCount={fiveLetterWordCount}
-            sixLetterWordCount={sixLetterWordCount}
-          ></ScoreSection>
+          {/* <ScoreSection
+          threeLetterWordCount={threeLetterWordCount}
+          fourLetterWordCount={fourLetterWordCount}
+          fiveLetterWordCount={fiveLetterWordCount}
+          sixLetterWordCount={sixLetterWordCount}
+          ></ScoreSection> */}
           <div className="column-content">
             <Timer
               onTimerEnd={onTimerEnd}

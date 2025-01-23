@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, hasStarted, score}) {
+export default function Timer({onTimerEnd, onStartClicked, hasStarted, score}) {
 
   const [countdownStarted, setCountdownStarted] = useState(false);
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(90);
 
   useEffect(() => {
     if (!countdownStarted) return;
