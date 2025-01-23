@@ -3,23 +3,30 @@ export default function ScoreSection({
   fourLetterWordCount,
   fiveLetterWordCount,
   sixLetterWordCount,
-  sevenLetterWordCount,
 }) {
   return (
     <div className="stats-column">
-      <h2>Bonus</h2>
-      <p>3 Letters {getDots(threeLetterWordCount)}</p>
-      <p>4 Letters: {getDots(fourLetterWordCount)}</p>
-      <p>5 Letters: {getDots(fiveLetterWordCount)}</p>
-      <p>6 Letters: {getDots(sixLetterWordCount)}</p>
-      <p>7 Letters: {getDots(sevenLetterWordCount)}</p>
+      <table>
+        <tr>
+          <td className="bonus-row-header">3</td>
+          <td className="bonus-row-header">4</td>
+          <td className="bonus-row-header">5</td>
+          <td className="bonus-row-header">6</td>
+        </tr>
+        <tr>
+          <td className="bonus-row-item">{getDots(threeLetterWordCount)}</td>
+          <td className="bonus-row-item">{getDots(fourLetterWordCount)}</td>
+          <td className="bonus-row-item">{getDots(fiveLetterWordCount)}</td>
+          <td className="bonus-row-item">{getDots(sixLetterWordCount)}</td>
+        </tr>
+      </table>
     </div>
   );
 }
 
 function getDots(count) {
   if (count <= 3) {
-    const filledDots = "•".repeat(count);
+    const filledDots = " ".repeat(count);
     const emptyDots = "○".repeat(3 - count);
     return filledDots + emptyDots;
   } else {

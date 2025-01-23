@@ -1,11 +1,12 @@
-import { Key, Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import "./App.css";
 import Timer from "./Timer";
 import dictImport from "../src/assets/masterWordList.txt";
 import ModalDialog from "./ModalDialog";
 import { createPortal } from "react-dom";
-import WordHistory from "./WordHistory";
 import ScoreSection from "./ScoreSection";
+import WordInput from "./WordInput";
+import LettersGrid from "./LettersGrid";
 
 export default function App() {
   const [word, setWord] = useState("");
@@ -125,8 +126,7 @@ export default function App() {
       threeLetterCount > 0 &&
       fourLetterCount > 0 &&
       fiveLetterCount > 0 &&
-      sixLetterCount > 0 &&
-      sevenLetterCount > 0
+      sixLetterCount > 0
     ) {
       tempScore += 1000;
     }
@@ -181,21 +181,6 @@ export default function App() {
     setLetters(shuffledArray);
   }
 
-  // const Dialog = ({ isOpen, children }) => {
-  //   setShowDialog(false);
-
-  //   return (
-  //     <div className="dialog-overlay">
-  //       <div className="dialog-content">
-  //         {children}
-  //         <button onClick={() => setShowDialog(false)}>Close</button>
-  //         <br></br><br></br>
-  //         <Share />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <>
       <Suspense fallback={<h2>Loading...</h2>}>
@@ -205,17 +190,15 @@ export default function App() {
             fourLetterWordCount={fourLetterWordCount}
             fiveLetterWordCount={fiveLetterWordCount}
             sixLetterWordCount={sixLetterWordCount}
-            sevenLetterWordCount={sevenLetterWordCount}
           ></ScoreSection>
           <div className="column-content">
             <Timer
               onTimerEnd={onTimerEnd}
               onStartClicked={handleStartClick}
-              handleShuffleClick={handleShuffleClick}
               hasStarted={hasStarted}
               score={score}
             />
-            <WordInputField word={word} onLetterClick={onLetterClick} />
+            <WordInput word={word} onLetterClick={onLetterClick} />
             <LettersGrid
               setWord={setWord}
               word={word}
@@ -223,15 +206,16 @@ export default function App() {
               hasStarted={hasStarted}
               clearWord={clearWord}
               submitWord={submitWord}
+              handleShuffleClick={handleShuffleClick}
             />
           </div>
-          <WordHistory submittedWords={submittedWords} />
+          {/* <WordHistory submittedWords={submittedWords} /> */}
         </div>
       </Suspense>
       {/* <img src={logo} alt="Quackle Logo" height="128px" /> */}
       {showModal &&
         createPortal(
-          <ModalDialog onClose={() => setShowModal(false)} />,
+          <ModalDialog score={score} onClose={() => setShowModal(false)} />,
           document.body
         )}
     </>
@@ -258,101 +242,5 @@ export default function App() {
 
 //   return (
 //     <button onClick={handleShare}>Share</button>
-//   );
-// }
-
-function LettersGrid({
-  setWord,
-  word,
-  letters,
-  hasStarted,
-  clearWord,
-  submitWord,
-}) {
-  const handleLetterClick = (letter: string) => {
-    setWord((prevWord: string) => prevWord + letter);
-  };
-
-  function isTileDisabled(item, hasStarted: boolean) {
-    if (!hasStarted) {
-      return true;
-    }
-    const wordLetterCount = word
-      .toString()
-      .split("")
-      .filter((currLetter: string) => currLetter === item).length;
-    return (
-      word.length > 0 &&
-      letters
-        .toString()
-        .split("")
-        .filter((currLetter: string) => currLetter === item).length ==
-        wordLetterCount
-    );
-  }
-
-  return (
-    <>
-      <div className="grid-container">
-        {letters.map((item, index) => (
-          <button
-            key={index}
-            className="grid-cell"
-            disabled={isTileDisabled(item, hasStarted)}
-            onClick={() => handleLetterClick(item)}
-          >
-            {hasStarted ? item : "?"}
-          </button>
-        ))}
-      </div>
-      <br></br>
-      <span>
-        <button className="clear" onClick={clearWord}>
-          X
-        </button>
-        <button className="submit" onClick={submitWord}>
-          Submit
-        </button>
-      </span>
-    </>
-  );
-}
-
-function WordInputField({ word, onLetterClick }) {
-  return (
-    <>
-      <div className="scrabble-word">
-        {word.split("").map((letter: string, index: Key) => (
-          <div
-            key={index}
-            className="scrabble-tile"
-            onClick={() => onLetterClick(letter, index)}
-          >
-            {letter.toUpperCase()}
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-
-// function Score({ submittedWords, threeLetterWordCount }) {
-//   let newScore = 0;
-//   for (const element of submittedWords) {
-//     newScore = newScore + element.length ** 2;
-//   }
-//   return (
-//     <div>
-//       <p>Score: {newScore}</p>
-//       <p>Words: {submittedWords.length}</p>
-//       <p style={{ color: threeLetterWordCount >= 3 ? "green" : "gray" }}>
-//         3 letter words
-//       </p>
-//       <p style={{ color: false ? "green" : "gray" }}>4 letter words</p>
-//       <p style={{ color: false ? "green" : "gray" }}>5 letter words</p>
-//       <p style={{ color: false ? "green" : "gray" }}>6 letter words</p>
-//       <p style={{ color: false ? "green" : "gray" }}>7 letter words</p>
-//       <p style={{ color: false ? "green" : "gray" }}>8 letter words</p>
-//     </div>
 //   );
 // }

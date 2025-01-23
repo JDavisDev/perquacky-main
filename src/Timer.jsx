@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRandom } from "@fortawesome/free-solid-svg-icons";
 
 export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, hasStarted, score}) {
 
   const [countdownStarted, setCountdownStarted] = useState(false);
-  const [time, setTime] = useState(90);
+  const [time, setTime] = useState(10);
 
   useEffect(() => {
     if (!countdownStarted) return;
@@ -36,7 +34,7 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
       return "#FFAC1C";
     }
     if (time <= 90) {
-      return "#1F51FF";
+      return "#009225ea";
     }
   }
 
@@ -44,9 +42,6 @@ export default function Timer({onTimerEnd, onStartClicked, handleShuffleClick, h
     <div>
     {!hasStarted ? <button className="start" onClick={handleStart}>Start</button> : <><br></br><br></br></> }
     <div className="top-button-container">
-    <button className="shuffle-button" onClick={handleShuffleClick}>
-      <FontAwesomeIcon icon={faRandom} className="shuffle-icon" />
-    </button>
     <button className="time" style={{backgroundColor: getColor()}}>{time}</button>
     <button className="score">{score}</button>
     </div>

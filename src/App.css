@@ -4,18 +4,30 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  align-items: flex-start;
-  align-content: center;
-  justify-content: center;
-  align-self: center;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  box-sizing: border-box; /* Ensure padding doesn't add to width */
 }
 
-html,
-body {
-  min-height: 100%;
-  width: 100%;
+dialog[oepn]::backdrop {
+  opacity: 0.65;
+}
+
+/*   Open state of the dialog  */
+dialog[open] {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+html, body {
   margin: 0;
-  overflow: hidden;
+  padding: 0;
+  min-height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .column-content {
@@ -24,25 +36,45 @@ body {
   align-items: flex-start;
 }
 
+.bonus-row-header {
+  gap: 20px; /* Space between items */
+  justify-content: center; /* Center items horizontally */
+  font-size: 28px;
+ color: #ffffff;
+ font-weight: bold;
+ font-family:Arial, Helvetica, sans-serif;
+}
+
+.bonus-row-item {
+  text-align: center;
+  font-size: 34px;
+  padding: 2px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-size: contain;
+  background-repeat: no-repeat no-repeat;
+  background-position: center center;
+  background-color: rgba(255, 255, 255, 0);
+  background-image: radial-gradient(circle closest-side, #00a724 0%, #00a724 50%, transparent 50%, transparent 100%)
+}
+
 .content {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .stats-column {
-  margin-top: 16px;
-  justify-content: start;
+  margin-top: 0px;
   align-items: flex-start;
 }
 
 .word-history-column {
-  margin-top: 16px;
-}
-
-.word-history-column {
+  flex: 1;
   justify-content: start;
   align-items: flex-start;
   margin-bottom: 16px;
+  margin-top: 16px;
 }
 
 .word-history-row {
@@ -51,7 +83,6 @@ body {
 
 .grid-container {
   display: grid;
-  max-width:100%;
   grid-template-columns: repeat(3, 1fr); /* Adjust for the number of columns */
   gap: 10px;
 }
@@ -59,15 +90,45 @@ body {
 .grid-cell {
   align-self: center;
   overflow: hidden;
-  width: 104px;
+  width: auto;
   height: 104px;
   text-align: center;
-  padding: 10px;
   font-size: 22px;
   color: black;
   background-color: antiquewhite;
   border-radius: 12px;
   border: 2px solid #ffffff;
+}
+
+.start {
+  border-radius: 8px;
+  width: 45%;
+  align-items: center;
+  padding-right: 32px;
+  padding-left: 32px;
+  padding-top: 8px;
+  margin-top: 8px;
+  padding-bottom: 12px;
+  font-size: 48px;
+  background-color: rgba(0, 0, 0, 0.918);
+}
+
+@media screen and (max-width: 700px) {
+  .grid-cell {
+    font-size: 16px; /* Reduce font size for smaller screens */
+    padding: 4px;
+    width: auto;
+    height: 80px;
+  }
+  .grid-container {
+     gap: 4px;
+  }
+  .start {
+    width: 40%;
+    font-size: 28px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
 }
 
 .grid-cell:disabled {
@@ -76,10 +137,10 @@ body {
   border: 2px solid #ffffff00;
 }
 
-/* ScrabbleWord.css */
 .scrabble-word {
   display: inline-flex;
-  width: auto;
+  min-width: 80%;
+  max-width: 100%;
   height: 42px;
   align-items: center;
   padding: 8px;
@@ -87,7 +148,7 @@ body {
   margin-bottom: 16px;
   border-radius: 10px;
   border: 4px solid white;
-  background-color: rgba(66, 24, 0, 0.267);
+  background-color: rgba(0, 0, 0, 0.562);
 }
 
 .scrabble-tile {
@@ -96,7 +157,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 4px solid #333;
+  border: 1px solid #333;
   border-radius: 12px;
   background-color: #ffffff;
   font-size: 24px;
@@ -104,23 +165,12 @@ body {
   color: #333;
   cursor: pointer;
   user-select: none;
+  margin-right: 4px;
 }
 
 .scrabble-tile:hover {
   transform: scale(1.25);
   box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-}
-
-.start {
-  border-radius: 8px;
-  width: 55%;
-  align-items: center;
-  padding-right: 32px;
-  padding-left: 32px;
-  padding-top: 8px;
-  padding-bottom: 12px;
-  font-size: 48px;
-  background-color: rgba(0, 0, 0, 0.918);
 }
 
 .top-button-container {
@@ -136,10 +186,10 @@ body {
   align-self: center;
   border-radius: 8px;
   margin-right: 16px;
-  width: 100px;
+  width: 40%;
   padding: 14px;
   color: white;
-  font-size: 32px;
+  font-size: 36px;
   background-color: #ff3e30ea;
   display: inline-block;
 }
@@ -148,25 +198,40 @@ body {
   align-content: center;
   align-self: center;
   border-radius: 8px;
-  width: 30%;
+  width: 40%;
   padding: 14px;
   color: white;
-  font-size: 32px;
-  background-color: rgba(0, 146, 37, 0.918);
-  display: inline-block;
+  font-size: 36px;
+  background-color: #1F51FF;
+  display: fle;
+}
+
+.button-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.button-row button {
+    cursor: pointer;
+    width: 128px;
+    height: 84px;
 }
 
 .shuffle-button {
   height: 70px;
   width: 100px;
-  align-self: center;
-  justify-content: center;
-  align-content: center;
-  display: inline-block;
   background-color: white;
   color: black;
   cursor: pointer;
+  padding-top: 14px; 
+  padding-bottom: 14px;
+  padding-right: 24px;
+  padding-left: 24px;
   margin-right: 16px;
+  border-radius: 8px;
 }
 
 .shuffle-icon {
@@ -175,9 +240,6 @@ body {
 }
 
 .clear {
-  align-content: center;
-  align-self: center;
-  justify-content: center;
   border-radius: 8px;
   width: 45%;
   height: auto;
@@ -188,21 +250,15 @@ body {
   margin-right: 16px;
   font-size: 32px;
   color: white;
-  background-color: rgba(163, 163, 163, 0.918);
-  display: inline-block;
+  background-color: rgba(255, 122, 33, 0.897);
 }
 
 .submit {
-  align-content: center;
-  align-self: center;
-  justify-content: center;
   border-radius: 8px;
-  width: 45%;
+  width: 40%;
   height: auto;
   padding: 14px;
-  margin-right: 16px;
-  font-size: 32px;
+  font-size: 24px;
   color: white;
   background-color: rgba(0, 203, 230, 0.918);
-  display: inline-block;
 }
