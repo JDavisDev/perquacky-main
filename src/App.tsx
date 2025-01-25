@@ -22,15 +22,18 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [hasPlayedToday, setHasPlayedToday] = useState(false);
   const [, setTodayDay] = useState("");
+  const [dict, setDict] = useState([]);
 
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
-  let dict = [];
   if (dict.length === 0) {
     fetch(dictImport)
       .then((response) => response.text())
       .then((data) => {
-        dict = data.split("\n").map((word) => word.trim().toUpperCase());
+        const dictTemp = data
+          .split("\n")
+          .map((word) => word.trim().toUpperCase());
+        setDict(dictTemp);
       });
   }
 
