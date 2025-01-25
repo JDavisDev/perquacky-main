@@ -46,14 +46,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #242424;
   }
   a:hover {
     color: #747bff;
@@ -62,3 +59,17 @@ button:hover {
     background-color: #f9f9f9;
   }
 }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color: #213547;
+      background-color: #242424;
+    }
+    a:hover {
+      color: #747bff;
+    }
+    button {
+      background-color: #030303;
+    }
+}
+

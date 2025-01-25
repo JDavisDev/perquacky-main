@@ -126,22 +126,18 @@ html, body {
 .grid-cell {
   align-self: center;
   overflow: hidden;
+  justify-content: center;
   width: auto;
   height: 104px;
+  margin-bottom: 8px;
   text-align: center;
-  font-size: 22px;
+  font-size: 30px;
   color: black;
   background-color: antiquewhite;
   border-radius: 12px;
-  border: 2px solid #ffffff;
 }
 
 .grid-cell:hover {
-  transform: scale(1.25);
-  font-size: 34px;
-}
-
-.grid-cell:active {
   transform: scale(1.25);
   font-size: 34px;
 }
@@ -165,6 +161,7 @@ html, body {
     padding: 4px;
     width: auto;
     height: 80px;
+    background-color: antiquewhite;
   }
   .grid-container {
      gap: 4px;
@@ -178,8 +175,6 @@ html, body {
 }
 
 .grid-cell:disabled {
-  color: gray;
-  background-color: lightgray;
   border: 2px solid #ffffff00;
 }
 
