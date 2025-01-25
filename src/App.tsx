@@ -26,11 +26,13 @@ export default function App() {
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
   let dict = [];
-  fetch(dictImport)
-    .then((response) => response.text())
-    .then((data) => {
-      dict = data.split("\n").map((word) => word.trim().toUpperCase());
-    });
+  if (dict.length === 0) {
+    fetch(dictImport)
+      .then((response) => response.text())
+      .then((data) => {
+        dict = data.split("\n").map((word) => word.trim().toUpperCase());
+      });
+  }
 
   function clearWord() {
     setWord("");
