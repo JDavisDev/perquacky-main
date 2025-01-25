@@ -21,7 +21,7 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [score, setScore] = useState(0);
   const [hasPlayedToday, setHasPlayedToday] = useState(false);
-  const [, setTodayDay] = useState("");
+  const [todayDay, setTodayDay] = useState("");
   const [dict, setDict] = useState([]);
 
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
@@ -161,7 +161,7 @@ export default function App() {
     clearWord();
     setShowModal(true);
     setHasStarted(false);
-    const today = getToday();
+    const today = todayDay;
     localStorage.setItem("score", score.toString());
     localStorage.setItem("date", today);
   }
