@@ -11,13 +11,15 @@ export default function LettersGrid({
   clearWord,
   submitWord,
   handleShuffleClick,
+  setDate,
 }) {
   useEffect(() => {
     const fetchData = async () => {
       fetch("https://perquacky-backend.vercel.app/letters")
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((data) => {
-          setLetters(data.split(""));
+          setLetters(data.letters.split(""));
+          setDate(data.date);
         });
     };
     fetchData();

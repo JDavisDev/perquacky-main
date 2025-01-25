@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import "./App.css";
 import Timer from "./Timer";
 import dictImport from "../src/assets/masterWordList.txt";
@@ -21,6 +21,7 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [score, setScore] = useState(0);
   const [hasPlayedToday, setHasPlayedToday] = useState(false);
+  const [, setTodayDay] = useState("");
 
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
@@ -30,11 +31,6 @@ export default function App() {
     .then((data) => {
       dict = data.split("\n").map((word) => word.trim().toUpperCase());
     });
-
-  useEffect(() => {
-    const didPlayToday = localStorage.getItem("date") === getToday();
-    setHasPlayedToday(didPlayToday);
-  }, []);
 
   function clearWord() {
     setWord("");
@@ -188,6 +184,12 @@ export default function App() {
     setLetters(shuffledArray);
   }
 
+  function setDate(date: string) {
+    setTodayDay(date);
+    const didPlayToday = localStorage.getItem("date") === date;
+    setHasPlayedToday(didPlayToday);
+  }
+
   return (
     <>
       {!hasPlayedToday ? (
@@ -216,6 +218,7 @@ export default function App() {
                 clearWord={clearWord}
                 submitWord={submitWord}
                 handleShuffleClick={handleShuffleClick}
+                setDate={setDate}
               />
             </div>
             {/* <WordHistory submittedWords={submittedWords} /> */}
