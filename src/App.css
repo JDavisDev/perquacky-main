@@ -9,14 +9,49 @@
   box-sizing: border-box; /* Ensure padding doesn't add to width */
 }
 
-dialog[oepn]::backdrop {
+dialog[open]::backdrop {
   opacity: 0.65;
 }
 
 /*   Open state of the dialog  */
 dialog[open] {
   opacity: 1;
+  align-self: center;
   transform: scaleY(1);
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 40%;
+  height: 40%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-img {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin: 0 auto;
+  padding-left: 10%;
+}
+
+.score-header {
+  font-size: 44px;
+  color: #0084ff;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.modal-close-button {
+  margin-top: 16px;
 }
 
 html, body {
@@ -98,6 +133,16 @@ html, body {
   background-color: antiquewhite;
   border-radius: 12px;
   border: 2px solid #ffffff;
+}
+
+.grid-cell:hover {
+  transform: scale(1.25);
+  font-size: 34px;
+}
+
+.grid-cell:active {
+  transform: scale(1.25);
+  font-size: 34px;
 }
 
 .start {

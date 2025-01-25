@@ -1,7 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRandom } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
 
 export default function LettersGrid({
+  setLetters,
   setWord,
   word,
   letters,
@@ -10,6 +12,17 @@ export default function LettersGrid({
   submitWord,
   handleShuffleClick,
 }) {
+  useEffect(() => {
+    const fetchData = async () => {
+      fetch("https://perquacky-backend.vercel.app/letters")
+        .then((response) => response.text())
+        .then((data) => {
+          setLetters(data.split(""));
+        });
+    };
+    fetchData();
+  }, []);
+
   const handleLetterClick = (letter: string) => {
     setWord((prevWord: string) => prevWord + letter);
   };

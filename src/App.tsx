@@ -6,6 +6,7 @@ import ModalDialog from "./ModalDialog";
 import { createPortal } from "react-dom";
 import WordInput from "./WordInput";
 import LettersGrid from "./LettersGrid";
+import logo from "./assets/quackle.png";
 
 export default function App() {
   const [word, setWord] = useState("");
@@ -19,17 +20,7 @@ export default function App() {
   const [sevenLetterWordCount, setSevenLetterWordCount] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      fetch("https://perquacky-backend.vercel.app/letters")
-        .then((response) => response.text())
-        .then((data) => {
-          setLetters(data.split(""));
-        });
-    };
-    fetchData();
-  }, []);
+  const [hasPlayedToday, setHasPlayedToday] = useState(false);
 
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
@@ -39,6 +30,11 @@ export default function App() {
     .then((data) => {
       dict = data.split("\n").map((word) => word.trim().toUpperCase());
     });
+
+  useEffect(() => {
+    const didPlayToday = localStorage.getItem("date") === getToday();
+    setHasPlayedToday(didPlayToday);
+  }, []);
 
   function clearWord() {
     setWord("");
@@ -164,6 +160,18 @@ export default function App() {
     clearWord();
     setShowModal(true);
     setHasStarted(false);
+    const today = getToday();
+    localStorage.setItem("score", score.toString());
+    localStorage.setItem("date", today);
+  }
+
+  function getToday(): string {
+    const date = new Date();
+    const update = new Intl.DateTimeFormat("en-US", {
+      dateStyle: "short",
+      timeZone: "America/New_York",
+    }).format(date); // 1/24/2025
+    return update;
   }
 
   const handleStartClick = () => {
@@ -182,35 +190,44 @@ export default function App() {
 
   return (
     <>
-      <Suspense fallback={<h2>Loading...</h2>}>
-        <div className="content">
-          {/* <ScoreSection
+      {hasPlayedToday ? (
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <div className="content">
+            {/* <ScoreSection
           threeLetterWordCount={threeLetterWordCount}
           fourLetterWordCount={fourLetterWordCount}
           fiveLetterWordCount={fiveLetterWordCount}
           sixLetterWordCount={sixLetterWordCount}
           ></ScoreSection> */}
-          <div className="column-content">
-            <Timer
-              onTimerEnd={onTimerEnd}
-              onStartClicked={handleStartClick}
-              hasStarted={hasStarted}
-              score={score}
-            />
-            <WordInput word={word} onLetterClick={onLetterClick} />
-            <LettersGrid
-              setWord={setWord}
-              word={word}
-              letters={letters}
-              hasStarted={hasStarted}
-              clearWord={clearWord}
-              submitWord={submitWord}
-              handleShuffleClick={handleShuffleClick}
-            />
+            <div className="column-content">
+              <Timer
+                onTimerEnd={onTimerEnd}
+                onStartClicked={handleStartClick}
+                hasStarted={hasStarted}
+                score={score}
+              />
+              <WordInput word={word} onLetterClick={onLetterClick} />
+              <LettersGrid
+                setLetters={setLetters}
+                setWord={setWord}
+                word={word}
+                letters={letters}
+                hasStarted={hasStarted}
+                clearWord={clearWord}
+                submitWord={submitWord}
+                handleShuffleClick={handleShuffleClick}
+              />
+            </div>
+            {/* <WordHistory submittedWords={submittedWords} /> */}
           </div>
-          {/* <WordHistory submittedWords={submittedWords} /> */}
+        </Suspense>
+      ) : (
+        <div>
+          <img src={logo} alt="Quackle Logo" height="128px" />
+          <h1>You played today: {getToday()}</h1>
+          <h1>Score: {localStorage.getItem("score")}</h1>
         </div>
-      </Suspense>
+      )}
       {/* <img src={logo} alt="Quackle Logo" height="128px" /> */}
       {showModal &&
         createPortal(
