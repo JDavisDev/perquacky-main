@@ -21,8 +21,8 @@ dialog[open] {
   position: fixed;
   top: 50px;
   left: 0;
-  width: 40%;
-  height: 40%;
+  width: 8%;
+  height: 80%;
   background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
@@ -41,6 +41,7 @@ dialog[open] {
   align-self: center;
   margin: 0 auto;
   padding-left: 10%;
+  padding-top: 20%;
 }
 
 .score-header {
