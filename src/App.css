@@ -137,11 +137,6 @@ html, body {
   border-radius: 12px;
 }
 
-.grid-cell:hover {
-  transform: scale(1.25);
-  font-size: 34px;
-}
-
 .start {
   border-radius: 8px;
   width: 45%;
@@ -278,11 +273,6 @@ html, body {
   cursor: pointer;
   user-select: none;
   margin-right: 4px;
-}
-
-.scrabble-tile:hover {
-  transform: scale(1.25);
-  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
 }
 
 .top-button-container {
