@@ -191,7 +191,12 @@ export default function App() {
 
   function setDate(date: string) {
     setTodayDay(date);
-    const didPlayToday = localStorage.getItem("date") === date;
+    const dateString = date; // MM/DD/YYYY format
+    const oneDate = new Date(dateString); // Parse the string into a Date object
+    const oneMilli = oneDate.getTime();
+    const localDate = new Date(localStorage.getItem("date"));
+    const localMilli = localDate.getTime();
+    const didPlayToday = oneMilli === localMilli;
     setHasPlayedToday(didPlayToday);
   }
 
