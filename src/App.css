@@ -156,24 +156,90 @@ html, body {
   background-color: rgba(0, 0, 0, 0.918);
 }
 
+.submit {
+  padding: 14px;
+  background-color: rgba(0, 203, 230, 0.918);
+  align-self: center;
+  overflow: hidden;
+  justify-content: center;
+  width: auto;
+  height: 104px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.shuffle-button {
+  padding: 14px;
+  background-color: rgba(0, 203, 230, 0.918);
+  align-self: center;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  width: 128px;
+  height: 104px;
+  text-align: center;
+  font-size: 32px;
+  color: rgb(255, 255, 255);
+  border-radius: 12px;
+}
+
+.shuffle-icon {
+  height: 38px;
+  width: 38px;
+}
+
 @media screen and (max-width: 700px) {
   .grid-cell {
     font-size: 16px; /* Reduce font size for smaller screens */
     padding: 4px;
-    width: auto;
+    width: 90;
     height: 80px;
     background-color: antiquewhite;
+  }
+
+  .grid-cell button {
+    width: 100%;
   }
   .grid-container {
      gap: 4px;
   }
   .start {
-    width: 40%;
+    width: 65%;
     font-size: 28px;
     padding-right: 32px;
     padding-left: 32px;
     color: white;
     background-color: rgba(0, 0, 0, 0.918);
+  }
+
+  .submit {
+    font-size: 16px; /* Reduce font size for smaller screens */
+    padding: 4px;
+    width: auto;
+    height: 88px;
+  }
+  .shuffle-button {
+    font-size: 16px; /* Reduce font size for smaller screens */
+    padding: 4px;
+    width: auto;
+    height: 88px;
+  }
+
+  .shuffle-button {
+    font-size: 16px; /* Reduce font size for smaller screens */
+    padding: 0px;
+    margin-top: 0px;
+    width: 100%;
+    height: 88px;
+  }
+  
+  .shuffle-icon {
+    height: 26px;
+    width: 26px;
   }
 }
 
@@ -258,26 +324,6 @@ html, body {
   align-items: center;
 }
 
-.shuffle-button {
-  padding: 14px;
-  background-color: rgba(0, 203, 230, 0.918);
-  align-self: center;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  width: 128px;
-  height: 104px;
-  text-align: center;
-  font-size: 32px;
-  color: rgb(255, 255, 255);
-  border-radius: 12px;
-}
-
-.shuffle-icon {
-  height: 38px;
-  width: 38px;
-}
-
 .clear {
   position: absolute;
   right: 16px;
@@ -291,20 +337,4 @@ html, body {
   padding: 0;
   margin-left: 12px;
   z-index: 1;
-}
-
-.submit {
-  padding: 14px;
-  background-color: rgba(0, 203, 230, 0.918);
-  align-self: center;
-  overflow: hidden;
-  justify-content: center;
-  width: auto;
-  height: 104px;
-  margin-bottom: 8px;
-  text-align: center;
-  font-size: 30px;
-  color: rgb(255, 255, 255);
-  border-radius: 12px;
-  font-weight: 700;
 }
