@@ -213,14 +213,17 @@ export default function App() {
                 hasStarted={hasStarted}
                 score={score}
               />
-              <WordInput word={word} onLetterClick={onLetterClick} />
+              <WordInput
+                word={word}
+                onLetterClick={onLetterClick}
+                clearWord={clearWord}
+              />
               <LettersGrid
                 setLetters={setLetters}
                 setWord={setWord}
                 word={word}
                 letters={letters}
                 hasStarted={hasStarted}
-                clearWord={clearWord}
                 submitWord={submitWord}
                 handleShuffleClick={handleShuffleClick}
                 setDate={setDate}
@@ -239,7 +242,11 @@ export default function App() {
       {/* <img src={logo} alt="Quackle Logo" height="128px" /> */}
       {showModal &&
         createPortal(
-          <ModalDialog score={score} onClose={() => setShowModal(false)} />,
+          <ModalDialog
+            score={score}
+            date={todayDay}
+            onClose={() => setShowModal(false)}
+          />,
           document.body
         )}
     </>

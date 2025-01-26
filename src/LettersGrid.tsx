@@ -8,7 +8,6 @@ export default function LettersGrid({
   word,
   letters,
   hasStarted,
-  clearWord,
   submitWord,
   handleShuffleClick,
   setDate,
@@ -111,6 +110,9 @@ export default function LettersGrid({
               {hasStarted ? letters[2] : "?"}
             </button>
           </div>
+          <button className="shuffle-button" onClick={handleShuffleClick}>
+            <FontAwesomeIcon icon={faRandom} className="shuffle-icon" />
+          </button>
         </div>
 
         <div className="column">
@@ -187,20 +189,11 @@ export default function LettersGrid({
               {hasStarted ? letters[9] : "?"}
             </button>
           </div>
+          <button className="submit" onClick={submitWord}>
+            Submit
+          </button>
         </div>
       </div>
-      <br></br>
-      <span className="button-row">
-        <button className="clear" onClick={clearWord}>
-          X
-        </button>
-        <button className="shuffle-button" onClick={handleShuffleClick}>
-          <FontAwesomeIcon icon={faRandom} className="shuffle-icon" />
-        </button>
-        <button className="submit" onClick={submitWord}>
-          Submit
-        </button>
-      </span>
     </>
   );
 }

@@ -1,12 +1,12 @@
 import logo from "./assets/quackle.png";
 
-export default function ModalDialog({ score, onClose }) {
+export default function ModalDialog({ score, onClose, date }) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
           title: "PlayQuackle.com",
-          text: "Quackle! 1/23/2025 - " + score,
+          text: "Quackle! " + date + " + score",
           url: "https://jdavisdev.github.io/perquacky-main/",
         });
       } catch (error) {
