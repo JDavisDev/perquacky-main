@@ -2,7 +2,6 @@
   height: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
   display: flex;
   justify-content: center; /* Center content horizontally */
@@ -61,6 +60,7 @@ html, body {
   min-height: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -191,7 +191,7 @@ html, body {
   .grid-cell {
     font-size: 16px; /* Reduce font size for smaller screens */
     padding: 4px;
-    width: 90;
+    width: 90px;
     height: 80px;
     background-color: antiquewhite;
   }
@@ -201,6 +201,7 @@ html, body {
   }
   .grid-container {
      gap: 4px;
+     width: 100%;
   }
   .start {
     width: 65%;
@@ -214,13 +215,13 @@ html, body {
   .submit {
     font-size: 16px; /* Reduce font size for smaller screens */
     padding: 4px;
-    width: auto;
+    width: 100px;
     height: 88px;
   }
   .shuffle-button {
     font-size: 16px; /* Reduce font size for smaller screens */
     padding: 4px;
-    width: auto;
+    width: 100px;
     height: 88px;
   }
 
