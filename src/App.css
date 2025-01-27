@@ -121,11 +121,19 @@ html, body {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Adjust for the number of columns */
   gap: 10px;
+  overflow-x: hidden;
+  position: relative;
+  width: fit-content;
+  align-self: center;
+  align-content: center;
 }
 
 .grid-cell {
+  overflow-x: hidden;
   align-self: center;
   overflow: hidden;
+  overflow-wrap: break-word;
+  position: relative;
   justify-content: center;
   width: auto;
   height: 104px;
@@ -201,7 +209,11 @@ html, body {
   }
   .grid-container {
      gap: 4px;
-     width: 100%;
+     overflow-x: hidden;
+  position: relative;
+  width: fit-content;
+  align-self: center;
+  align-content: center;
   }
   .start {
     width: 65%;
@@ -246,6 +258,7 @@ html, body {
 .scrabble-word {
   display: flex;
   align-items: center;
+  align-self: center;
   min-width: 80%;
   max-width: 100%;
   height: 42px;

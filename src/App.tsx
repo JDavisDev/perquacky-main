@@ -202,7 +202,7 @@ export default function App() {
 
   return (
     <>
-      {!hasPlayedToday ? (
+      {true ? (
         <Suspense fallback={<h2>Loading...</h2>}>
           <div className="content">
             {/* <ScoreSection
