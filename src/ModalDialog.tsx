@@ -6,7 +6,7 @@ export default function ModalDialog({ score, onClose, date }) {
       try {
         await navigator.share({
           title: "PlayQuackle.com",
-          text: "Quackle! " + date + " + score",
+          text: "Quackle! " + date + " - " + score,
           url: "https://jdavisdev.github.io/perquacky-main/",
         });
       } catch (error) {
