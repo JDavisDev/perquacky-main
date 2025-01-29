@@ -24,6 +24,15 @@ export default function App() {
   const [todayDay, setTodayDay] = useState("");
   const [dict, setDict] = useState([]);
 
+  const [isFlashing, setIsFlashing] = useState(false);
+
+  const triggerAnimation = () => {
+    setIsFlashing(true);
+    setTimeout(() => {
+      setIsFlashing(false);
+    }, 1000); // 1 second
+  };
+
   // const url = 'https://jdavisdev.github.io/perquacky-main/masterWordList.txt';
   // const debugUrl = 'http://localhost:5173/src/assets/masterWordList.txt';
   if (dict.length === 0) {
@@ -124,7 +133,7 @@ export default function App() {
       fiveLetterCount > 0 &&
       sixLetterCount > 0
     ) {
-      tempScore += 1000;
+      tempScore += 500;
     }
     setScore(tempScore);
   }
@@ -144,6 +153,7 @@ export default function App() {
     } else {
       // show error or highlight the input field
       // setSubmittedWords([...submittedWords, 'Invalid word']);
+      triggerAnimation();
       clearWord();
     }
   }
@@ -222,6 +232,7 @@ export default function App() {
                 word={word}
                 onLetterClick={onLetterClick}
                 clearWord={clearWord}
+                isFlashing={isFlashing}
               />
               <LettersGrid
                 setLetters={setLetters}
@@ -240,8 +251,10 @@ export default function App() {
       ) : (
         <div>
           <img src={logo} alt="Quackle Logo" height="128px" />
-          <h1>You played today: {getToday()}</h1>
-          <h1>Score: {localStorage.getItem("score")}</h1>
+          <h1 style={{ color: "white" }}>You played today: {getToday()}</h1>
+          <h1 style={{ color: "white" }}>
+            Score: {localStorage.getItem("score")}
+          </h1>
         </div>
       )}
       {/* <img src={logo} alt="Quackle Logo" height="128px" /> */}

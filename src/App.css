@@ -255,6 +255,12 @@ html, body {
   border: 2px solid #ffffff00;
 }
 
+@keyframes flashRed {
+  0% { border-color: white; }
+  50% { border-color: red; }
+  100% { border-color: white; }
+}
+
 .scrabble-word {
   display: flex;
   align-items: center;
@@ -270,6 +276,11 @@ html, body {
   background-color: rgba(0, 0, 0, 0.562);
   position: relative;
   padding-right: 44px;
+  transition: border-color 0.3s ease;
+}
+
+.flash {
+  animation: flashRed 0.2s ease-in-out;
 }
 
 .scrabble-tile {

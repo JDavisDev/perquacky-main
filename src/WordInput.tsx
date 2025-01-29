@@ -1,9 +1,14 @@
 import { Key } from "react";
-export default function WordInput({ word, onLetterClick, clearWord }) {
+export default function WordInput({
+  word,
+  onLetterClick,
+  clearWord,
+  isFlashing,
+}) {
   return (
     <>
       <div className="word-input-row">
-        <div className="scrabble-word">
+        <div className={`scrabble-word ${isFlashing ? "flash" : ""}`}>
           {word.split("").map((letter: string, index: Key) => (
             <div
               key={index}
