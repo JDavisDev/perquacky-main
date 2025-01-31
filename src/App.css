@@ -81,28 +81,10 @@ html, body {
  font-family:Arial, Helvetica, sans-serif;
 }
 
-.bonus-row-item {
-  text-align: center;
-  font-size: 34px;
-  padding: 2px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-size: contain;
-  background-repeat: no-repeat no-repeat;
-  background-position: center center;
-  background-color: rgba(255, 255, 255, 0);
-  background-image: radial-gradient(circle closest-side, #00a724 0%, #00a724 50%, transparent 50%, transparent 100%)
-}
-
 .content {
   grid-template-columns: repeat(2, 1fr);
   max-width: 100%;
   max-height: 100%;
-}
-
-.stats-column {
-  margin-top: 0px;
-  align-items: flex-start;
 }
 
 .word-history-column {
@@ -139,7 +121,7 @@ html, body {
   height: 104px;
   margin-bottom: 8px;
   text-align: center;
-  font-size: 30px;
+  font-size: 38px;
   color: black;
   background-color: antiquewhite;
   border-radius: 12px;
@@ -147,14 +129,31 @@ html, body {
 
 .start {
   border-radius: 8px;
-  width: 45%;
+  width: 40%;
   align-items: center;
   padding-right: 32px;
   padding-left: 32px;
   padding-top: 8px;
   margin-top: 8px;
   padding-bottom: 12px;
-  font-size: 48px;
+  display: inline-block;
+  font-size: 42px;
+  color: white;
+  margin-right: 16px;
+  background-color: rgba(0, 0, 0, 0.918);
+}
+
+.rules {
+  display: inline-block;
+  border-radius: 8px;
+  width: 40%;
+  align-items: center;
+  padding-right: 32px;
+  padding-left: 32px;
+  padding-top: 8px;
+  margin-top: 8px;
+  padding-bottom: 12px;
+  font-size: 42px;
   color: white;
   background-color: rgba(0, 0, 0, 0.918);
 }
@@ -195,9 +194,34 @@ html, body {
   width: 38px;
 }
 
+.time {
+  align-content: center;
+  align-self: center;
+  border-radius: 8px;
+  margin-right: 16px;
+  width: 40%;
+  padding: 14px;
+  color: white;
+  font-size: 36px;
+  background-color: #ff3e30ea;
+  display: inline-block;
+}
+
+.score {
+  align-content: center;
+  align-self: center;
+  border-radius: 8px;
+  width: 40%;
+  padding: 14px;
+  color: white;
+  font-size: 36px;
+  background-color: #1F51FF;
+  display: block;
+}
+
 @media screen and (max-width: 700px) {
   .grid-cell {
-    font-size: 16px; /* Reduce font size for smaller screens */
+    font-size: 28px;
     padding: 4px;
     width: 90px;
     height: 80px;
@@ -216,10 +240,27 @@ html, body {
   align-content: center;
   }
   .start {
-    width: 65%;
-    font-size: 28px;
-    padding-right: 32px;
-    padding-left: 32px;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    width: 30%;
+    font-size: 24px;
+    padding-right: 14px;
+    padding-left: 14px;
+    display: inline-block;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.918);
+  }
+
+  .rules {
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    width: 30%;
+    font-size: 24px;
+    padding-right: 14px;
+    padding-left: 14px;
+    display: inline-block;
     color: white;
     background-color: rgba(0, 0, 0, 0.918);
   }
@@ -236,18 +277,35 @@ html, body {
     width: 100px;
     height: 88px;
   }
-
-  .shuffle-button {
-    font-size: 16px; /* Reduce font size for smaller screens */
-    padding: 0px;
-    margin-top: 0px;
-    width: 100%;
-    height: 88px;
-  }
   
   .shuffle-icon {
     height: 26px;
     width: 26px;
+  }
+
+  .time {
+    align-content: center;
+    align-self: center;
+    border-radius: 8px;
+    margin-right: 16px;
+    width: 30%;
+    padding: 14px;
+    color: white;
+    font-size: 30px;
+    background-color: #ff3e30ea;
+    display: inline-block;
+  }
+  
+  .score {
+    align-content: center;
+    align-self: center;
+    border-radius: 8px;
+    width: 30%;
+    padding: 14px;
+    color: white;
+    font-size: 30px;
+    background-color: #1F51FF;
+    display: block;
   }
 }
 
@@ -306,31 +364,6 @@ html, body {
   align-items: center;
   margin-bottom: 4px;
   margin-top: 16px;
-}
-
-.time {
-  align-content: center;
-  align-self: center;
-  border-radius: 8px;
-  margin-right: 16px;
-  width: 40%;
-  padding: 14px;
-  color: white;
-  font-size: 36px;
-  background-color: #ff3e30ea;
-  display: inline-block;
-}
-
-.score {
-  align-content: center;
-  align-self: center;
-  border-radius: 8px;
-  width: 40%;
-  padding: 14px;
-  color: white;
-  font-size: 36px;
-  background-color: #1F51FF;
-  display: block;
 }
 
 .word-input-row {

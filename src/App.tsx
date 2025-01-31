@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import WordInput from "./WordInput";
 import LettersGrid from "./LettersGrid";
 import logo from "./assets/quackle.png";
+import ScoreSection from "./ScoreSection";
 
 export default function App() {
   const [word, setWord] = useState("");
@@ -227,6 +228,12 @@ export default function App() {
                 onStartClicked={handleStartClick}
                 hasStarted={hasStarted}
                 score={score}
+              />
+              <ScoreSection
+                threeLetterWordCount={threeLetterWordCount}
+                fourLetterWordCount={fourLetterWordCount}
+                fiveLetterWordCount={fiveLetterWordCount}
+                sixLetterWordCount={sixLetterWordCount}
               />
               <WordInput
                 word={word}

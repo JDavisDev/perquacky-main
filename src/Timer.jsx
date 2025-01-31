@@ -26,6 +26,10 @@ export default function Timer({onTimerEnd, onStartClicked, hasStarted, score}) {
     onStartClicked();
   }
 
+  function handleRules() {
+    //  open new page
+  }
+
   function getColor() {
     if (time <= 10) {
       return "#ff3e30ea";
@@ -40,7 +44,8 @@ export default function Timer({onTimerEnd, onStartClicked, hasStarted, score}) {
 
   return (
     <div>
-    {!hasStarted ? <button className="start" onClick={handleStart}>Start</button> : <><br></br><br></br></> }
+    {!hasStarted ? <button className="start" onClick={handleStart}>Start</button> : <></> }
+    {!hasStarted ? <button className="rules" onClick={handleRules}>Rules</button> : <></> }
     <div className="top-button-container">
     <button className="time" style={{backgroundColor: getColor()}}>{time}</button>
     <button className="score">{score}</button>
