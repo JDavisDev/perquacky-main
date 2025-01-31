@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRandom } from "@fortawesome/free-solid-svg-icons";
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function LettersGrid({
   setLetters,
@@ -45,35 +45,6 @@ export default function LettersGrid({
         wordLetterCount
     );
   }
-
-  // return (
-  //   <>
-  //     <div className="grid-container">
-  //       {letters.map((item, index) => (
-  //         <button
-  //           key={index}
-  //           className="grid-cell"
-  //           disabled={isTileDisabled(item, hasStarted)}
-  //           onClick={() => handleLetterClick(item)}
-  //         >
-  //           {hasStarted ? item : "?"}
-  //         </button>
-  //       ))}
-  //     </div>
-  //     <br></br>
-  //     <span className="button-row">
-  //       <button className="clear" onClick={clearWord}>
-  //         X
-  //       </button>
-  //       <button className="shuffle-button" onClick={handleShuffleClick}>
-  //         <FontAwesomeIcon icon={faRandom} className="shuffle-icon" />
-  //       </button>
-  //       <button className="submit" onClick={submitWord}>
-  //         Submit
-  //       </button>
-  //     </span>
-  //   </>
-  // );
 
   return (
     <>
