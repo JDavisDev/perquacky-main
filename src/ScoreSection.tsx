@@ -9,38 +9,40 @@ export default function ScoreSection({
   return (
     <div className="stats-column">
       <table>
-        <tr>
-          <td className="bonus-row-header">3</td>
-          <td className="bonus-row-header">4</td>
-          <td className="bonus-row-header">5</td>
-          <td className="bonus-row-header">6</td>
-        </tr>
-        <tr>
-          <td>
-            <CircularProgress
-              percentage={getProgressPercentage(threeLetterWordCount)}
-              count={getCount(threeLetterWordCount)}
-            />
-          </td>
-          <td>
-            <CircularProgress
-              percentage={getProgressPercentage(fourLetterWordCount)}
-              count={getCount(fourLetterWordCount)}
-            />
-          </td>
-          <td>
-            <CircularProgress
-              percentage={getProgressPercentage(fiveLetterWordCount)}
-              count={getCount(fiveLetterWordCount)}
-            />
-          </td>
-          <td>
-            <CircularProgress
-              percentage={getProgressPercentage(sixLetterWordCount)}
-              count={getCount(sixLetterWordCount)}
-            />
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td className="bonus-row-header">3</td>
+            <td className="bonus-row-header">4</td>
+            <td className="bonus-row-header">5</td>
+            <td className="bonus-row-header">6</td>
+          </tr>
+          <tr>
+            <td>
+              <CircularProgress
+                percentage={getProgressPercentage(threeLetterWordCount)}
+                count={getCount(threeLetterWordCount)}
+              />
+            </td>
+            <td>
+              <CircularProgress
+                percentage={getProgressPercentage(fourLetterWordCount)}
+                count={getCount(fourLetterWordCount)}
+              />
+            </td>
+            <td>
+              <CircularProgress
+                percentage={getProgressPercentage(fiveLetterWordCount)}
+                count={getCount(fiveLetterWordCount)}
+              />
+            </td>
+            <td>
+              <CircularProgress
+                percentage={getProgressPercentage(sixLetterWordCount)}
+                count={getCount(sixLetterWordCount)}
+              />
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );

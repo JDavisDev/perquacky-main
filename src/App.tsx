@@ -24,7 +24,6 @@ export default function App() {
   const [hasPlayedToday, setHasPlayedToday] = useState(false);
   const [todayDay, setTodayDay] = useState("");
   const [dict, setDict] = useState([]);
-
   const [isFlashing, setIsFlashing] = useState(false);
 
   const triggerAnimation = () => {
@@ -104,6 +103,9 @@ export default function App() {
         case 9:
           tempScore += 1000;
           break;
+        case 10:
+          tempScore += 1500;
+          break;
       }
     });
 
@@ -123,10 +125,10 @@ export default function App() {
       tempScore += 300;
     }
     if (sixLetterWordCount >= 3) {
-      tempScore += 400;
+      tempScore += 500;
     }
     if (sevenLetterWordCount >= 3) {
-      tempScore += 500;
+      // tempScore += 500;
     }
     if (
       threeLetterCount > 0 &&
@@ -277,26 +279,3 @@ export default function App() {
     </>
   );
 }
-
-// function Share() {
-//   const handleShare = async () => {
-//     if (navigator.share) {
-//       try {
-//         await navigator.share({
-//           title: "Quackle",
-//           text: "You suck!",
-//           url: "https://jdavisdev.github.io/perquacky-main/",
-//         });
-//       } catch (error) {
-//         console.error('Error sharing:', error);
-//       }
-//     } else {
-//       // Fallback behavior if Web Share API is not supported
-//       console.log('Web Share API not supported');
-//     }
-//   };
-
-//   return (
-//     <button onClick={handleShare}>Share</button>
-//   );
-// }

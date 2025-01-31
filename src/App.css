@@ -127,6 +127,11 @@ html, body {
   border-radius: 12px;
 }
 
+.grid-cell:disabled {
+  pointer-events: none;
+  background-color: gray;
+}
+
 .start {
   border-radius: 8px;
   width: 40%;
@@ -228,6 +233,11 @@ html, body {
     background-color: antiquewhite;
   }
 
+  .grid-cell:disabled {
+    pointer-events: none;
+    background-color: gray;
+  }
+
   .grid-cell button {
     width: 100%;
   }
@@ -248,8 +258,8 @@ html, body {
     padding-right: 14px;
     padding-left: 14px;
     display: inline-block;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.918);
+    background-color: white;
+    color: rgba(0, 0, 0, 0.918);
   }
 
   .rules {
@@ -261,8 +271,13 @@ html, body {
     padding-right: 14px;
     padding-left: 14px;
     display: inline-block;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.918);
+    background-color: white;
+    color: rgba(0, 0, 0, 0.918);
+  }
+
+  .rules:link {
+    background-color: white;
+    color: rgba(0, 0, 0, 0.918);
   }
 
   .submit {
@@ -307,10 +322,6 @@ html, body {
     background-color: #1F51FF;
     display: block;
   }
-}
-
-.grid-cell:disabled {
-  border: 2px solid #ffffff00;
 }
 
 @keyframes flashRed {
