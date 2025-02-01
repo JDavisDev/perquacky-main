@@ -4,7 +4,7 @@ import "./Rules.css";
 export default function Rules() {
   return (
     <div className="rules-page">
-      <Link to={"/perquacky-main"} className="back-button"></Link>
+      <Link to={"/"} className="back-button"></Link>
       <div className="game-instructions">
         <p className="intro-text">
           You have 90 seconds to create as many words, three letters or longer,

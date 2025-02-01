@@ -7,7 +7,7 @@ import Rules from "./Rules.tsx";
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Routes>
-      <Route path="/perquacky-main" element={<App />} />
+      <Route path="/" element={<App />} />
       <Route path="rules" element={<Rules />} />
     </Routes>
   </BrowserRouter>
