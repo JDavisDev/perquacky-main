@@ -5,8 +5,8 @@ export default function ModalDialog({ score, onClose, date }) {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "PlayQuackle.com",
-          text: "Quackle! " + date + " - " + score,
+          title: "Quackle",
+          text: date + " - " + score,
           url: "https://playquackle.com",
         });
       } catch (error) {
