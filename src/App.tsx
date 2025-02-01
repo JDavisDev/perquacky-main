@@ -95,13 +95,13 @@ export default function App() {
           break;
         case 7:
           sevenLetterCount++;
-          tempScore += 200;
+          tempScore += 160;
           break;
         case 8:
-          tempScore += 500;
+          tempScore += 320;
           break;
         case 9:
-          tempScore += 1000;
+          tempScore += 640;
           break;
         case 10:
           tempScore += 1500;
@@ -122,10 +122,10 @@ export default function App() {
       tempScore += 200;
     }
     if (fiveLetterWordCount >= 3) {
-      tempScore += 300;
+      tempScore += 400;
     }
     if (sixLetterWordCount >= 3) {
-      tempScore += 500;
+      tempScore += 600;
     }
     if (sevenLetterWordCount >= 3) {
       // tempScore += 500;

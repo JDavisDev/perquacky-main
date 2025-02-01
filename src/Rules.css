@@ -16,9 +16,118 @@
     display: inline-block;
     margin-right: 4px;
     margin-bottom: 0px;
+    font-size: 14px;
 }
 
 .rules-page h3 {
     color: white;
     margin-bottom: 2px;
 }
+
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    margin-top: 8px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .back-button:hover {
+    background-color: #e0e0e0;
+    border-color: #999;
+  }
+  
+  .back-button:active {
+    background-color: #d0d0d0;
+  }
+  
+  .back-button::before {
+    content: "✖"; /* Unicode X character */
+  }
+
+  .game-instructions {
+    font-family: "Arial", sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .intro-text {
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .instruction-text {
+    font-size: 1em;
+    margin-bottom: 15px;
+  }
+  
+  .rules-page h3 {
+    color: #2c3e50;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .table-container {
+    overflow-x: auto; /* Enables scrolling on small screens */
+  }
+  
+  .rules-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    min-width: 320px; /* Ensures table readability on small screens */
+  }
+  
+  .rules-page th, .rules-page td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .rules-page th {
+    background: #6ab5ff;
+    color: #fff;
+  }
+  
+  .rules-page tr {
+    background: #f2f2f2;
+  }
+  
+  /* Responsive Table for Small Screens */
+  @media (max-width: 600px) {
+    .game-instructions {
+      padding: 15px;
+    }
+  
+    .intro-text {
+      font-size: 1em;
+    }
+  
+    .rules-page table {
+      font-size: 0.9em; /* Smaller font for small screens */
+    }
+  
+    .rules-page th, .rules-page td {
+      padding: 6px;
+    }
+
+    .rules-page h3 {
+        color: white;
+    }
+  }
