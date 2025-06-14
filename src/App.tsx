@@ -8,6 +8,7 @@ import WordInput from "./WordInput";
 import LettersGrid from "./LettersGrid";
 import logo from "./assets/quackle.png";
 import ScoreSection from "./ScoreSection";
+import AppStoreButtons from "./AppStoreButtons";
 
 export default function App() {
   const [word, setWord] = useState("");
@@ -253,6 +254,7 @@ export default function App() {
                 handleShuffleClick={handleShuffleClick}
                 setDate={setDate}
               />
+              {hasStarted ? <></> : <AppStoreButtons />}
             </div>
             {/* <WordHistory submittedWords={submittedWords} /> */}
           </div>

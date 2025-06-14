@@ -199,6 +199,19 @@ html, body {
   width: 38px;
 }
 
+.app-store-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px; /* adjust spacing here */
+  padding: 4px;
+}
+
+.store-badge {
+  height: 48px;
+  cursor: pointer;
+}
+
 .time {
   align-content: center;
   align-self: center;
